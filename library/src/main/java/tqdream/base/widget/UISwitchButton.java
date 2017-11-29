@@ -1,4 +1,4 @@
-package tqdream.base.base.widget;
+package tqdream.base.widget;
 
 import android.content.Context;
 import android.content.res.Resources;

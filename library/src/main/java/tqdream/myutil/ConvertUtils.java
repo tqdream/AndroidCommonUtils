@@ -18,7 +18,8 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
-import tqdream.myutil.regex.ConstUtils;
+import tqdream.base.utils.CloseUtils;
+import tqdream.base.utils.ConstUtil.ConstUtils;
 
 import static com.blankj.utilcode.utils.ConstUtils.BYTE;
 import static com.blankj.utilcode.utils.ConstUtils.GB;

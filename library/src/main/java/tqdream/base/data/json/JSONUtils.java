@@ -1,3 +1,4 @@
+package tqdream.base.data.json;
 /**
  * Copyright 2015 Zhenguo Jin
  * <p/>
@@ -13,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tqdream.base.base.data.json;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +29,7 @@ import tqdream.myutil.StringUtils;
 
 /**
  * Json解析工具类 推荐使用Google的GSON
- *
+ * <p>
  * Created by zhenguo on 4/17/15.
  */
 public final class JSONUtils {
@@ -47,11 +47,11 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>if {@link JSONObject#getLong(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONObject#getLong(String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>if {@link JSONObject#getLong(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONObject#getLong(String)}</li>
+     * </ul>
      */
     public static Long getLong(JSONObject jsonObject, String key, Long defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -75,10 +75,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getLong(JSONObject, String, Long)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getLong(JSONObject, String, Long)}</li>
+     * </ul>
      */
     public static Long getLong(String jsonData, String key, Long defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -125,11 +125,11 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>if {@link JSONObject#getInt(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONObject#getInt(String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>if {@link JSONObject#getInt(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONObject#getInt(String)}</li>
+     * </ul>
      */
     public static Integer getInt(JSONObject jsonObject, String key, Integer defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -153,10 +153,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getInt(JSONObject, String, Integer)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getInt(JSONObject, String, Integer)}</li>
+     * </ul>
      */
     public static Integer getInt(String jsonData, String key, Integer defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -203,11 +203,11 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>if {@link JSONObject#getDouble(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONObject#getDouble(String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>if {@link JSONObject#getDouble(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONObject#getDouble(String)}</li>
+     * </ul>
      */
     public static Double getDouble(JSONObject jsonObject, String key, Double defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -231,10 +231,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getDouble(JSONObject, String, Double)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getDouble(JSONObject, String, Double)}</li>
+     * </ul>
      */
     public static Double getDouble(String jsonData, String key, Double defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -281,11 +281,11 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>if {@link JSONObject#getString(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONObject#getString(String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>if {@link JSONObject#getString(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONObject#getString(String)}</li>
+     * </ul>
      */
     public static String getString(JSONObject jsonObject, String key, String defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -309,10 +309,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getString(JSONObject, String, String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getString(JSONObject, String, String)}</li>
+     * </ul>
      */
     public static String getString(String jsonData, String key, String defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -337,11 +337,11 @@ public final class JSONUtils {
      * @param defaultValue
      * @param keyArray
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if keyArray is null or empty, return defaultValue</li>
-     *         <li>get {@link #getJSONObject(JSONObject, String, JSONObject)} by recursion, return it. if anyone is
-     *         null, return directly</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if keyArray is null or empty, return defaultValue</li>
+     * <li>get {@link #getJSONObject(JSONObject, String, JSONObject)} by recursion, return it. if anyone is
+     * null, return directly</li>
+     * </ul>
      */
     public static String getStringCascade(JSONObject jsonObject, String defaultValue, String... keyArray) {
         if (jsonObject == null || keyArray == null || keyArray.length == 0) {
@@ -365,11 +365,11 @@ public final class JSONUtils {
      * @param defaultValue
      * @param keyArray
      * @return <ul>
-     *         <li>if jsonData is null, return defaultValue</li>
-     *         <li>if keyArray is null or empty, return defaultValue</li>
-     *         <li>get {@link #getJSONObject(JSONObject, String, JSONObject)} by recursion, return it. if anyone is
-     *         null, return directly</li>
-     *         </ul>
+     * <li>if jsonData is null, return defaultValue</li>
+     * <li>if keyArray is null or empty, return defaultValue</li>
+     * <li>get {@link #getJSONObject(JSONObject, String, JSONObject)} by recursion, return it. if anyone is
+     * null, return directly</li>
+     * </ul>
      */
     public static String getStringCascade(String jsonData, String defaultValue, String... keyArray) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -393,12 +393,12 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>if {@link JSONObject#getJSONArray(String)} exception, return defaultValue</li>
-     *         <li>if {@link JSONArray#getString(int)} exception, return defaultValue</li>
-     *         <li>return string array</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>if {@link JSONObject#getJSONArray(String)} exception, return defaultValue</li>
+     * <li>if {@link JSONArray#getString(int)} exception, return defaultValue</li>
+     * <li>return string array</li>
+     * </ul>
      */
     public static String[] getStringArray(JSONObject jsonObject, String key, String[] defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -430,10 +430,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getStringArray(JSONObject, String, String[])}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getStringArray(JSONObject, String, String[])}</li>
+     * </ul>
      */
     public static String[] getStringArray(String jsonData, String key, String[] defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -458,12 +458,12 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>if {@link JSONObject#getJSONArray(String)} exception, return defaultValue</li>
-     *         <li>if {@link JSONArray#getString(int)} exception, return defaultValue</li>
-     *         <li>return string array</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>if {@link JSONObject#getJSONArray(String)} exception, return defaultValue</li>
+     * <li>if {@link JSONArray#getString(int)} exception, return defaultValue</li>
+     * <li>return string array</li>
+     * </ul>
      */
     public static List<String> getStringList(JSONObject jsonObject, String key, List<String> defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -495,10 +495,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getStringList(JSONObject, String, List)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getStringList(JSONObject, String, List)}</li>
+     * </ul>
      */
     public static List<String> getStringList(String jsonData, String key, List<String> defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -523,11 +523,11 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>if {@link JSONObject#getJSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONObject#getJSONObject(String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>if {@link JSONObject#getJSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONObject#getJSONObject(String)}</li>
+     * </ul>
      */
     public static JSONObject getJSONObject(JSONObject jsonObject, String key, JSONObject defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -551,10 +551,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonData is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getJSONObject(JSONObject, String, JSONObject)}</li>
-     *         </ul>
+     * <li>if jsonData is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getJSONObject(JSONObject, String, JSONObject)}</li>
+     * </ul>
      */
     public static JSONObject getJSONObject(String jsonData, String key, JSONObject defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -579,11 +579,11 @@ public final class JSONUtils {
      * @param defaultValue
      * @param keyArray
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if keyArray is null or empty, return defaultValue</li>
-     *         <li>get {@link #getJSONObject(JSONObject, String, JSONObject)} by recursion, return it. if anyone is
-     *         null, return directly</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if keyArray is null or empty, return defaultValue</li>
+     * <li>get {@link #getJSONObject(JSONObject, String, JSONObject)} by recursion, return it. if anyone is
+     * null, return directly</li>
+     * </ul>
      */
     public static JSONObject getJSONObjectCascade(JSONObject jsonObject, JSONObject defaultValue, String... keyArray) {
         if (jsonObject == null || keyArray == null || keyArray.length == 0) {
@@ -607,11 +607,11 @@ public final class JSONUtils {
      * @param defaultValue
      * @param keyArray
      * @return <ul>
-     *         <li>if jsonData is null, return defaultValue</li>
-     *         <li>if keyArray is null or empty, return defaultValue</li>
-     *         <li>get {@link #getJSONObject(JSONObject, String, JSONObject)} by recursion, return it. if anyone is
-     *         null, return directly</li>
-     *         </ul>
+     * <li>if jsonData is null, return defaultValue</li>
+     * <li>if keyArray is null or empty, return defaultValue</li>
+     * <li>get {@link #getJSONObject(JSONObject, String, JSONObject)} by recursion, return it. if anyone is
+     * null, return directly</li>
+     * </ul>
      */
     public static JSONObject getJSONObjectCascade(String jsonData, JSONObject defaultValue, String... keyArray) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -636,11 +636,11 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>if {@link JSONObject#getJSONArray(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONObject#getJSONArray(String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>if {@link JSONObject#getJSONArray(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONObject#getJSONArray(String)}</li>
+     * </ul>
      */
     public static JSONArray getJSONArray(JSONObject jsonObject, String key, JSONArray defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -664,10 +664,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getJSONArray(JSONObject, String, JSONObject)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getJSONArray(JSONObject, String, JSONObject)}</li>
+     * </ul>
      */
     public static JSONArray getJSONArray(String jsonData, String key, JSONArray defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -692,10 +692,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if key is null or empty, return defaultValue</li>
-     *         <li>return {@link JSONObject#getBoolean(String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if key is null or empty, return defaultValue</li>
+     * <li>return {@link JSONObject#getBoolean(String)}</li>
+     * </ul>
      */
     public static boolean getBoolean(JSONObject jsonObject, String key, Boolean defaultValue) {
         if (jsonObject == null || StringUtils.isEmpty(key)) {
@@ -719,10 +719,10 @@ public final class JSONUtils {
      * @param key
      * @param defaultValue
      * @return <ul>
-     *         <li>if jsonObject is null, return defaultValue</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
-     *         <li>return {@link JSONUtils#getBoolean(JSONObject, String, Boolean)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return defaultValue</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return defaultValue</li>
+     * <li>return {@link JSONUtils#getBoolean(JSONObject, String, Boolean)}</li>
+     * </ul>
      */
     public static boolean getBoolean(String jsonData, String key, Boolean defaultValue) {
         if (StringUtils.isEmpty(jsonData)) {
@@ -746,9 +746,9 @@ public final class JSONUtils {
      * @param jsonObject key-value pairs json
      * @param key
      * @return <ul>
-     *         <li>if jsonObject is null, return null</li>
-     *         <li>return {@link JSONUtils#parseKeyAndValueToMap(String)}</li>
-     *         </ul>
+     * <li>if jsonObject is null, return null</li>
+     * <li>return {@link JSONUtils#parseKeyAndValueToMap(String)}</li>
+     * </ul>
      */
     public static Map<String, String> getMap(JSONObject jsonObject, String key) {
         return JSONUtils.parseKeyAndValueToMap(JSONUtils.getString(jsonObject, key, null));
@@ -760,11 +760,11 @@ public final class JSONUtils {
      * @param jsonData key-value pairs string
      * @param key
      * @return <ul>
-     *         <li>if jsonData is null, return null</li>
-     *         <li>if jsonData length is 0, return empty map</li>
-     *         <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return null</li>
-     *         <li>return {@link JSONUtils#getMap(JSONObject, String)}</li>
-     *         </ul>
+     * <li>if jsonData is null, return null</li>
+     * <li>if jsonData length is 0, return empty map</li>
+     * <li>if jsonData {@link JSONObject#JSONObject(String)} exception, return null</li>
+     * <li>return {@link JSONUtils#getMap(JSONObject, String)}</li>
+     * </ul>
      */
     public static Map<String, String> getMap(String jsonData, String key) {
 
@@ -791,9 +791,9 @@ public final class JSONUtils {
      *
      * @param sourceObj key-value pairs json
      * @return <ul>
-     *         <li>if sourceObj is null, return null</li>
-     *         <li>else parse entry one by one</li>
-     *         </ul>
+     * <li>if sourceObj is null, return null</li>
+     * <li>else parse entry one by one</li>
+     * </ul>
      */
     @SuppressWarnings("rawtypes")
     public static Map<String, String> parseKeyAndValueToMap(JSONObject sourceObj) {
@@ -814,10 +814,10 @@ public final class JSONUtils {
      *
      * @param source key-value pairs json
      * @return <ul>
-     *         <li>if source is null or source's length is 0, return empty map</li>
-     *         <li>if source {@link JSONObject#JSONObject(String)} exception, return null</li>
-     *         <li>return {@link JSONUtils#parseKeyAndValueToMap(JSONObject)}</li>
-     *         </ul>
+     * <li>if source is null or source's length is 0, return empty map</li>
+     * <li>if source {@link JSONObject#JSONObject(String)} exception, return null</li>
+     * <li>return {@link JSONUtils#parseKeyAndValueToMap(JSONObject)}</li>
+     * </ul>
      */
     public static Map<String, String> parseKeyAndValueToMap(String source) {
         if (StringUtils.isEmpty(source)) {

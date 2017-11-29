@@ -4,6 +4,8 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
 
+    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 25

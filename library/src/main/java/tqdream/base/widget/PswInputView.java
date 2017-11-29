@@ -19,7 +19,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import androidcommonutil.tqdreamlibrary.R;

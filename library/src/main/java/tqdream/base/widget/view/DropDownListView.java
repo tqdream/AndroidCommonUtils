@@ -1,4 +1,4 @@
-package tqdream.base.base.widget.view;
+package tqdream.base.widget.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;

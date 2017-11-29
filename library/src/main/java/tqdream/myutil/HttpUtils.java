@@ -16,6 +16,9 @@ import cn.trinea.android.common.constant.HttpConstants;
 import cn.trinea.android.common.entity.HttpRequest;
 import cn.trinea.android.common.entity.HttpResponse;
 import cn.trinea.android.common.service.HttpCache;
+import tqdream.base.utils.ArrayUtils;
+import tqdream.base.utils.IOUtils;
+import tqdream.base.utils.MapUtils;
 
 /**
  * HttpUtils
@@ -473,7 +476,7 @@ public class HttpUtils {
         }
 
         protected HttpResponse doInBackground(String... url) {
-            if (ArrayUtils2.isEmpty(url)) {
+            if (ArrayUtils.isEmpty(url)) {
                 return null;
             }
             return httpGet(url[0]);
@@ -506,7 +509,7 @@ public class HttpUtils {
         }
 
         protected HttpResponse doInBackground(HttpRequest... httpRequest) {
-            if (ArrayUtils2.isEmpty(httpRequest)) {
+            if (ArrayUtils.isEmpty(httpRequest)) {
                 return null;
             }
             return httpGet(httpRequest[0]);

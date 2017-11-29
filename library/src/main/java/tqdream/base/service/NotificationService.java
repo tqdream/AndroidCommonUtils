@@ -1,4 +1,4 @@
-package tqdream.base.base.service;
+package tqdream.base.service;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

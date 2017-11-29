@@ -7,7 +7,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import com.litesuits.android.log.Log;
-import tqdream.base.base.utils.Check;
+
+import tqdream.base.utils.EmptyUtils;
 
 /**
  * <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -55,7 +56,7 @@ public class PhoneReceiver extends BroadcastReceiver {
         if (NEW_OUTGOING_CALL.equals(intent.getAction())) {
             isDialOut = true;
             String outNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-            if (!Check.isEmpty(outNumber)) {
+            if (!EmptyUtils.isEmpty(outNumber)) {
                 this.number = outNumber;
             }
             if (phoneListener != null) {
@@ -64,7 +65,7 @@ public class PhoneReceiver extends BroadcastReceiver {
         } else if (PHONE_STATE.equals(intent.getAction())) {
             String state = intent.getStringExtra(INTENT_STATE);
             String inNumber = intent.getStringExtra(INTENT_INCOMING_NUMBER);
-            if (!Check.isEmpty(inNumber)) {
+            if (!EmptyUtils.isEmpty(inNumber)) {
                 this.number = inNumber;
             }
             if (RINGING.equals(state)) {

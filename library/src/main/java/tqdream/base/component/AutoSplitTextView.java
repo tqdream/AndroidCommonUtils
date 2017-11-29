@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class AutoSplitTextView extends TextView {
+public class AutoSplitTextView extends android.support.v7.widget.AppCompatTextView {
     private boolean mEnabled = true;
 
     public AutoSplitTextView(Context context) {

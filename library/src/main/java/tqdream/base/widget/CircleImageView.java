@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tqdream.base.base.widget;
+package tqdream.base.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -35,6 +35,8 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import androidcommonutil.tqdreamlibrary.R;
 
 public class CircleImageView extends ImageView {
 

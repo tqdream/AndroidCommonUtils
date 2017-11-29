@@ -1,4 +1,5 @@
-package tqdream.base.base.data; /**
+package tqdream.base.data;
+/**
  * Copyright 2014 Zhenguo Jin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +15,11 @@ package tqdream.base.base.data; /**
  * limitations under the License.
  */
 
-import java.io.File;
-import java.math.BigDecimal;
-
 import android.content.Context;
 import android.os.Environment;
+
+import java.io.File;
+import java.math.BigDecimal;
 
 /**
  * 本应用数据清除管理器

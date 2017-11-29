@@ -1,4 +1,4 @@
-package tqdream.base.base.receiver;
+package tqdream.base.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

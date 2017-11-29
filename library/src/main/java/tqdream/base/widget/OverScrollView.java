@@ -1,4 +1,4 @@
-package tqdream.base.base.widget;
+package tqdream.base.widget;
 /*
  * Copyright (C) 2006 The Android Open Source Project
  *

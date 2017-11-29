@@ -18,10 +18,7 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package tqdream.base.base.widget.view;
-
-import java.util.LinkedList;
-import java.util.Queue;
+package tqdream.base.widget.view;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -34,6 +31,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.Scroller;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class HorizontalListView extends AdapterView<ListAdapter> {
 

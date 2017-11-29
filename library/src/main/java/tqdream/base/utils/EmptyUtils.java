@@ -72,4 +72,12 @@ public class EmptyUtils {
     public static boolean isNotEmpty(Object obj) {
         return !isEmpty(obj);
     }
+
+    public static boolean isNull(Object o) {
+        return o == null;
+    }
+
+    public static boolean isNotNull(Object o) {
+        return o == null;
+    }
 }

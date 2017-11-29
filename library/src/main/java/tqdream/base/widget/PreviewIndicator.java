@@ -1,4 +1,4 @@
-package tqdream.base.base.widget;
+package tqdream.base.widget;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidcommonutil.tqdreamlibrary.R;
+import tqdream.base.utils.screen.DensityUtil;
 
 /**
  * 作者： 巴掌 on 16/8/23 22:00
@@ -40,7 +41,7 @@ public class PreviewIndicator extends LinearLayout {
                 imageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.bg_circle_unselected));
             }
             LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(DensityUtil.dp2pxCeilInt(getContext(), 10), 0, DensityUtil.dp2pxCeilInt(getContext(), 10), 0);
+            params.setMargins(DensityUtil.dip2px(getContext(), 10), 0, DensityUtil.dip2px(getContext(), 10), 0);
             addView(imageView, params);
             mImageList.add(imageView);
         }

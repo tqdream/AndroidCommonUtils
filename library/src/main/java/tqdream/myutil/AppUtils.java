@@ -16,11 +16,8 @@
 package tqdream.myutil;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.ActivityManager.MemoryInfo;
-import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
@@ -33,30 +30,16 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
-import android.support.compat.BuildConfig;
-import android.telephony.TelephonyManager;
-import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileFilter;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.security.MessageDigest;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
 import javax.security.auth.x500.X500Principal;
-
-import tqdream.myutil.log.LogUtils;
-import tqdream.myutil.security.EncryptUtils;
 
 /**
  * APP工具类

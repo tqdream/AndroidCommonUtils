@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tqdream.base.base.widget;
+package tqdream.base.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

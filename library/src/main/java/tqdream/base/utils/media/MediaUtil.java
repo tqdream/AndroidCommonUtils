@@ -1,7 +1,9 @@
 package tqdream.base.utils.media;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -90,5 +92,20 @@ public class MediaUtil {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
         intent.putExtra("return-data", false); // 设置为不返回数据
         activity.startActivityForResult(intent, requestCode);
+    }
+
+
+    /**
+     * 将 content://media/external/images/media/32073 格式路径转为文件绝对路径
+     * @param uri
+     * @return
+     */
+    public static String convertToFilePath(Context context, Uri uri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            return cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
+        }
+        return null;
     }
 }

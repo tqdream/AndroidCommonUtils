@@ -21,14 +21,13 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputConnectionWrapper;
-import android.widget.EditText;
 
 /**
  * 通用EditText，包含返回和删除操作
  *
  * @author venshine
  */
-public class CommonEditText extends EditText {
+public class CommonEditText extends android.support.v7.widget.AppCompatEditText {
 
     public CommonEditText(Context context) {
         super(context);
