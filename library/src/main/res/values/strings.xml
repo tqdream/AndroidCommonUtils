@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">tqdreamLibrary</string>
+
+    <string name="drop_down_list_header_default_text">Click to refresh…</string>
+    <string name="drop_down_list_header_pull_text">Drop Down to refresh…</string>
+    <string name="drop_down_list_header_release_text">Release to refresh…</string>
+    <string name="drop_down_list_header_loading_text">Loading…</string>
+    <string name="drop_down_list_footer_default_text">More</string>
+    <string name="drop_down_list_footer_loading_text">Loading…</string>
+    <string name="drop_down_list_footer_no_more_text">No More</string>
+    <string name="image_content">Image</string>
+
+
+    <string name="btn_sure">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="tips">提示</string>¬
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- SwitchButton-->
+    <declare-styleable name="SwitchButton">
+        <attr name="bmWidth" format="dimension" />
+        <attr name="bmHeight" format="dimension" />
+    </declare-styleable>
+    <!-- SwitchButton end-->
+</resources>

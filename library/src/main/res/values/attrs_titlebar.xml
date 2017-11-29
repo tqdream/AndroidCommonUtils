@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBar">
+        <attr name="style" format="string|reference" />
+        <attr name="android:text" />
+        <attr name="android:textColor" />
+        <attr name="android:textSize" />
+        <!-- Size of title text. -->
+
+        <attr name="tBar_leftText" format="string|reference" />
+        <attr name="tBar_leftTextSize" format="dimension|reference" />
+        <attr name="tBar_leftTextColor" format="reference|color" />
+
+        <attr name="tBar_titleText" format="string|reference" />
+        <attr name="tBar_titleTextSize" format="dimension|reference" />
+        <attr name="tBar_titleTextColor" format="reference|color" />
+
+        <attr name="tBar_rightText" format="string|reference" />
+        <attr name="tBar_rightTextSize" format="dimension|reference" />
+        <attr name="tBar_rightTextColor" format="reference|color" />
+
+        <attr name="tBar_leftImage" format="reference" />
+        <attr name="tBar_rightImage" format="reference" />
+        <attr name="tBar_centerImage" format="reference" />
+
+    </declare-styleable>
+</resources>
