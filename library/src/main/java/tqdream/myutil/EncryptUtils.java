@@ -14,7 +14,7 @@ import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import tqdream.base.utils.CloseUtils;
+import tqdream.utils.file.CloseUtils;
 
 import static tqdream.myutil.ConvertUtils.bytes2HexString;
 

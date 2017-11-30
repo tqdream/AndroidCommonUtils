@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import java.io.InputStreamReader;
 
+import tqdream.utils.file.FileUtils;
+
 /**
  * AssetDatabaseOpenHelper
  * <ul>

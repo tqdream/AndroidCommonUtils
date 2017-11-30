@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
-import tqdream.base.utils.CloseUtils;
+import tqdream.utils.file.CloseUtils;
 
 /**
  * <pre>

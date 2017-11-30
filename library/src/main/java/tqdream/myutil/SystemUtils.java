@@ -36,6 +36,8 @@ import java.security.MessageDigest;
 import java.util.List;
 import java.util.UUID;
 
+import tqdream.utils.system.SmsUtilCompat;
+
 
 /**
  * 设备信息类

@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import tqdream.base.utils.CloseUtils;
+import tqdream.utils.file.CloseUtils;
 
 /**
  * <pre>

@@ -16,7 +16,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import tqdream.base.utils.CloseUtils;
+import tqdream.utils.file.CloseUtils;
 
 /**
  * <pre>

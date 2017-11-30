@@ -15,6 +15,7 @@ import cn.trinea.android.common.service.impl.ImageSDCardCache;
 import cn.trinea.android.common.service.impl.ImageSDCardCache.OnImageSDCallbackListener;
 import cn.trinea.android.common.service.impl.PreloadDataCache.OnGetDataListener;
 import cn.trinea.android.common.service.impl.RemoveTypeLastUsedTimeFirst;
+import tqdream.utils.file.FileUtils;
 
 /**
  * ImageCacheManager
