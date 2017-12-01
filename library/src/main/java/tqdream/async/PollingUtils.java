@@ -22,7 +22,7 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.text.TextUtils;
 
-import tqdream.myutil.log.LogUtils;
+import tqdream.log.log.LogUtils;
 
 /**
  * 轮询服务工具类

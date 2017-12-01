@@ -14,6 +14,8 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
+import tqdream.utils.ShellUtils;
+
 /**
  * <pre>
  *     author: Blankj

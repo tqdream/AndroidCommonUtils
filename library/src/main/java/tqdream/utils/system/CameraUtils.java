@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 import tqdream.myutil.StringUtils;
-import tqdream.myutil.ImageUtils;
+import tqdream.utils.image.ImageUtils;
 
 /**
  * <pre>

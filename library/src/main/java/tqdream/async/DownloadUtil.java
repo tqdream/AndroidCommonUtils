@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
-import tqdream.myutil.common.CommonUtil;
+import tqdream.myutil.util1.CommonUtil;
 
 /**
  * Created by WuXiaolong

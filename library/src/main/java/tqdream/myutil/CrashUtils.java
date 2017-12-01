@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import tqdream.utils.file.CloseUtils;
+import tqdream.utils.system.VibrationUtils;
 
 /**
  * <pre>

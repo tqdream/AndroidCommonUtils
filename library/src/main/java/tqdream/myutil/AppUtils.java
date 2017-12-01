@@ -41,6 +41,9 @@ import java.util.List;
 
 import javax.security.auth.x500.X500Principal;
 
+import tqdream.utils.ProcessUtils;
+import tqdream.utils.system.VibrationUtils;
+
 /**
  * APP工具类
  * APP相关信息工具类。获取版本信息

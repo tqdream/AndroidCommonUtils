@@ -15,6 +15,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import tqdream.utils.file.CloseUtils;
+import tqdream.utils.system.VibrationUtils;
 
 import static tqdream.myutil.ConvertUtils.bytes2HexString;
 

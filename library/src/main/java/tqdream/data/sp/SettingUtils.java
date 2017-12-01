@@ -24,7 +24,7 @@ import android.preference.PreferenceManager;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import tqdream.myutil.log.LogUtils;
+import tqdream.log.log.LogUtils;
 
 /**
  * 应用配置工具类

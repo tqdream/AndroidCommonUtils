@@ -35,6 +35,8 @@ import com.ihongqiqu.util.ShellUtils.CommandResult;
 import java.io.File;
 import java.util.List;
 
+import tqdream.utils.ShellUtils;
+
 /**
  * PackageUtils
  * <ul>

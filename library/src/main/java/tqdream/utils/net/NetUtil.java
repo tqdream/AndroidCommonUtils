@@ -32,7 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tqdream.myutil.LogUtils;
-import tqdream.myutil.ShellUtils;
+import tqdream.utils.ShellUtils;
 
 //跟网络相关的工具类
 public class NetUtil {

@@ -27,6 +27,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,11 +89,10 @@ public class GsonUtil {
         return jsonStr;
     }
 
-
     public static List<?> jsonToList(String jsonStr) {
         List<?> objList = null;
         if (gson != null) {
-            Type type = new com.google.gson.reflect.TypeToken<List<?>>() {
+            Type type = new TypeToken<List<?>>() {
             }.getType();
             objList = gson.fromJson(jsonStr, type);
         }
@@ -126,22 +126,34 @@ public class GsonUtil {
                 list.add(gson.fromJson(elem, cls));
             }
         }
-
         return list;
     }
+
+    /**
+     * Convert a json string to ArrayList<?>
+     *
+     * @param json
+     * @return
+     */
+    public static <T> ArrayList<T> jsonToArrayList(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, new TypeToken<ArrayList<T>>() {
+        }.getType());
+    }
+
 
 
     public static Map<?, ?> jsonToMap(String jsonStr) {
         Map<?, ?> objMap = null;
         if (gson != null) {
-            Type type = new com.google.gson.reflect.TypeToken<Map<?, ?>>() {
+            Type type = new TypeToken<Map<?, ?>>() {
             }.getType();
             objMap = gson.fromJson(jsonStr, type);
         }
         return objMap;
     }
 
-    public static Object jsonToBean(String jsonStr, Class<?> cl) {
+    public static Object jsonToObject(String jsonStr, Class<?> cl) {
         Object obj = null;
         if (gson != null) {
             obj = gson.fromJson(jsonStr, cl);
@@ -149,6 +161,17 @@ public class GsonUtil {
         return obj;
     }
 
+    /**
+     * Convert a json string to Generic<T>
+     *
+     * @param json
+     * @param <T>
+     * @return
+     */
+    public static <T> T jsonToGeneric(String json, TypeToken<T> token) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, token.getType());
+    }
 
     @SuppressWarnings("unchecked")
     public static <T> T jsonToBeanDateSerializer(String jsonStr, Class<T> cl,

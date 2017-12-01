@@ -12,6 +12,8 @@ import android.webkit.MimeTypeMap;
 
 import java.io.File;
 
+import tqdream.utils.system.VibrationUtils;
+
 /**
  * <pre>
  *     author: Blankj

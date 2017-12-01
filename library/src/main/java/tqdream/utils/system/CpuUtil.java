@@ -1,10 +1,5 @@
 package tqdream.utils.system;
 
-import tqdream.log.Log;
-import tqdream.utils.file.FileUtil;
-
-import tqdream.base.base.utils.Check;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
@@ -12,6 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Pattern;
+
+import tqdream.log.Log;
+import tqdream.utils.EmptyUtils;
+import tqdream.utils.file.FileUtil;
 
 /**
  * Get CPU info.
@@ -96,7 +95,7 @@ public class CpuUtil {
      * Get CPU name.
      */
     public static String getCpuName() {
-        if (!Check.isEmpty(CPU_NAME)) {
+        if (!EmptyUtils.isEmpty(CPU_NAME)) {
             return CPU_NAME;
         }
         try {

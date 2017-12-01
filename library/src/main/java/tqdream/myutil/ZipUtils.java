@@ -17,6 +17,7 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import tqdream.utils.file.CloseUtils;
+import tqdream.utils.system.VibrationUtils;
 
 /**
  * <pre>
