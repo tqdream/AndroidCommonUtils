@@ -52,7 +52,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
-import tqdream.myutil.StringUtils;
+import tqdream.utils.StringUtils;
 import tqdream.utils.file.FileUtils;
 
 import static tqdream.utils.image.BitmapUtil.zoom;

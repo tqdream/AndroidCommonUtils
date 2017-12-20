@@ -22,7 +22,7 @@ import android.provider.MediaStore;
 
 import java.io.File;
 
-import tqdream.myutil.util1.FileUtils;
+import tqdream.utils.file.FileUtils2;
 
 /**
  * 相机操作
@@ -51,7 +51,7 @@ public class CameraUtils {
      * @param fileName
      */
     public void openCamera(Activity activity, String path, String fileName) {
-        FileUtils.makeDirs(path);
+        FileUtils2.makeDirs(path);
         File cameraFile = new File(path, fileName);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile));

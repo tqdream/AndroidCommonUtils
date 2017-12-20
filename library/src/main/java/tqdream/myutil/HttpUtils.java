@@ -16,9 +16,9 @@ import cn.trinea.android.common.constant.HttpConstants;
 import cn.trinea.android.common.entity.HttpRequest;
 import cn.trinea.android.common.entity.HttpResponse;
 import cn.trinea.android.common.service.HttpCache;
-import tqdream.utils.ArrayUtils;
 import tqdream.utils.IOUtils;
 import tqdream.utils.MapUtils;
+import tqdream.utils.StringUtils;
 
 /**
  * HttpUtils

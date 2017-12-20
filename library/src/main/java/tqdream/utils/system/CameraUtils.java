@@ -12,7 +12,7 @@ import android.provider.MediaStore;
 import java.io.File;
 import java.io.IOException;
 
-import tqdream.myutil.StringUtils;
+import tqdream.utils.StringUtils;
 import tqdream.utils.image.ImageUtils;
 
 /**

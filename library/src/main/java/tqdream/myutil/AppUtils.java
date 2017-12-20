@@ -41,7 +41,9 @@ import java.util.List;
 
 import javax.security.auth.x500.X500Principal;
 
+import tqdream.utils.IntentUtils2;
 import tqdream.utils.ProcessUtils;
+import tqdream.utils.StringUtils;
 import tqdream.utils.system.VibrationUtils;
 
 /**
@@ -72,7 +74,7 @@ public final class AppUtils {
      * @return {@code true}: 已安装<br>{@code false}: 未安装
      */
     public static boolean isInstallApp(Context context, String packageName) {
-        return !StringUtils.isEmpty(packageName) && IntentUtils.getLaunchAppIntent(context, packageName) != null;
+        return !StringUtils.isEmpty(packageName) && IntentUtils2.getLaunchAppIntent(context, packageName) != null;
     }
 
     //============================以上为添加的方法==================================
@@ -125,7 +127,7 @@ public final class AppUtils {
      */
     public static void installApp(Context context, File file) {
         if (!VibrationUtils.FileUtils.isFileExists(file)) return;
-        context.startActivity(IntentUtils.getInstallAppIntent(file));
+        context.startActivity(IntentUtils2.getInstallAppIntent(file));
     }
 
     /**
@@ -148,7 +150,7 @@ public final class AppUtils {
      */
     public static void installApp(Activity activity, File file, int requestCode) {
         if (!VibrationUtils.FileUtils.isFileExists(file)) return;
-        activity.startActivityForResult(IntentUtils.getInstallAppIntent(file), requestCode);
+        activity.startActivityForResult(IntentUtils2.getInstallAppIntent(file), requestCode);
     }
 
     /**
@@ -192,7 +194,7 @@ public final class AppUtils {
      */
     public static void uninstallApp(Activity activity, String packageName, int requestCode) {
         if (StringUtils.isEmpty(packageName)) return;
-        activity.startActivityForResult(IntentUtils.getUninstallAppIntent(packageName), requestCode);
+        activity.startActivityForResult(IntentUtils2.getUninstallAppIntent(packageName), requestCode);
     }
 
     /**
@@ -219,7 +221,7 @@ public final class AppUtils {
      */
     public static void launchApp(Context context, String packageName) {
         if (StringUtils.isEmpty(packageName)) return;
-        context.startActivity(IntentUtils.getLaunchAppIntent(context, packageName));
+        context.startActivity(IntentUtils2.getLaunchAppIntent(context, packageName));
     }
 
     /**
@@ -231,7 +233,7 @@ public final class AppUtils {
      */
     public static void launchApp(Activity activity, String packageName, int requestCode) {
         if (StringUtils.isEmpty(packageName)) return;
-        activity.startActivityForResult(IntentUtils.getLaunchAppIntent(activity, packageName), requestCode);
+        activity.startActivityForResult(IntentUtils2.getLaunchAppIntent(activity, packageName), requestCode);
     }
 
     /**
@@ -251,7 +253,7 @@ public final class AppUtils {
      */
     public static void getAppDetailsSettings(Context context, String packageName) {
         if (StringUtils.isEmpty(packageName)) return;
-        context.startActivity(IntentUtils.getAppDetailsSettingsIntent(packageName));
+        context.startActivity(IntentUtils2.getAppDetailsSettingsIntent(packageName));
     }
 
 

@@ -40,6 +40,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import tqdream.utils.StringUtils;
+
 /**
  * ClassUtils. (Tool, Static, ThreadSafe)
  *

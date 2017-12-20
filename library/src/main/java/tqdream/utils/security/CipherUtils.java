@@ -24,7 +24,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
-import tqdream.myutil.StringUtils;
+import tqdream.utils.StringUtils;
 
 /**
  * 加密与解密的工具类

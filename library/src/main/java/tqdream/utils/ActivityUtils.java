@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import tqdream.myutil.IntentUtils;
-
 /**
  * <pre>
  *     author: Blankj
@@ -56,6 +54,6 @@ public class ActivityUtils {
      * @param bundle      bundle
      */
     public static void launchActivity(Context context, String packageName, String className, Bundle bundle) {
-        context.startActivity(IntentUtils.getComponentIntent(packageName, className, bundle));
+        context.startActivity(IntentUtils2.getComponentIntent(packageName, className, bundle));
     }
 }

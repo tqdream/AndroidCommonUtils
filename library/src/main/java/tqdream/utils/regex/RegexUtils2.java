@@ -2,7 +2,7 @@ package tqdream.utils.regex;
 
 import java.util.regex.Pattern;
 
-import tqdream.myutil.StringUtils;
+import tqdream.utils.StringUtils;
 
 /**
  * <pre>

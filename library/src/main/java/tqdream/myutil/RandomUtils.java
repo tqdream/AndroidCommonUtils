@@ -2,6 +2,8 @@ package tqdream.myutil;
 
 import java.util.Random;
 
+import tqdream.utils.StringUtils;
+
 /**
  * Random Utils
  * <ul>
