@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import tqdream.utils.StringUtil;
+
 /**
  * 日期操作
  *
@@ -149,7 +151,7 @@ public class CalendarUtils {
      */
     public static String getTime(long time, String format) {
         if (time > 0) {
-            if (StringUtils.isEmpty(format)) {
+            if (StringUtil.isEmpty(format)) {
                 format = DATE_FORMAT;
             }
             SimpleDateFormat sf = new SimpleDateFormat(format);

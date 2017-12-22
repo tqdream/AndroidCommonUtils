@@ -18,6 +18,8 @@ package tqdream.myutil;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import tqdream.utils.StringUtil;
+
 /**
  * 验证数据合法性
  *
@@ -126,7 +128,7 @@ public class VerifyUtils {
      */
     public static boolean isContainsChinese(String data) {
         String chinese = "[\u0391-\uFFE5]";
-        if (!StringUtils.isEmpty(data)) {
+        if (!StringUtil.isEmpty(data)) {
             for (int i = 0; i < data.length(); i++) {
                 String temp = data.substring(i, i + 1);
                 boolean flag = temp.matches(chinese);

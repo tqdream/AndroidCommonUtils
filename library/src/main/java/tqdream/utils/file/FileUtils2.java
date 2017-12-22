@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-import tqdream.myutil.StringUtils;
+import tqdream.utils.StringUtil;
 
 /**
  * 文件操作
@@ -79,7 +79,7 @@ public class FileUtils2 {
      * @return
      */
     public static boolean writeFile(String filePath, String content, boolean append) {
-        if (StringUtils.isEmpty(content)) {
+        if (StringUtil.isEmpty(content)) {
             return false;
         }
         FileWriter fileWriter = null;
@@ -177,7 +177,7 @@ public class FileUtils2 {
      * @param destFilePath
      */
     public static void moveFile(String srcFilePath, String destFilePath) throws FileNotFoundException {
-        if (StringUtils.isEmpty(srcFilePath) || StringUtils.isEmpty(destFilePath)) {
+        if (StringUtil.isEmpty(srcFilePath) || StringUtil.isEmpty(destFilePath)) {
             throw new RuntimeException("Both srcFilePath and destFilePath cannot be null.");
         }
         moveFile(new File(srcFilePath), new File(destFilePath));
@@ -240,7 +240,7 @@ public class FileUtils2 {
      * @return
      */
     public static String getFileNameWithoutSuffix(String filePath) {
-        if (StringUtils.isEmpty(filePath)) {
+        if (StringUtil.isEmpty(filePath)) {
             return filePath;
         }
         int suffix = filePath.lastIndexOf(FILE_SUFFIX_SEPARATOR);
@@ -261,7 +261,7 @@ public class FileUtils2 {
      * @return
      */
     public static String getFileName(String filePath) {
-        if (StringUtils.isEmpty(filePath)) {
+        if (StringUtil.isEmpty(filePath)) {
             return filePath;
         }
         int fp = filePath.lastIndexOf(File.separator);
@@ -275,7 +275,7 @@ public class FileUtils2 {
      * @return
      */
     public static String getFolderName(String filePath) {
-        if (StringUtils.isEmpty(filePath)) {
+        if (StringUtil.isEmpty(filePath)) {
             return filePath;
         }
         int fp = filePath.lastIndexOf(File.separator);
@@ -289,7 +289,7 @@ public class FileUtils2 {
      * @return
      */
     public static String getFileSuffix(String filePath) {
-        if (StringUtils.isEmpty(filePath)) {
+        if (StringUtil.isEmpty(filePath)) {
             return filePath;
         }
         int suffix = filePath.lastIndexOf(FILE_SUFFIX_SEPARATOR);
@@ -308,7 +308,7 @@ public class FileUtils2 {
      */
     public static boolean makeDirs(String filePath) {
         String folderName = getFolderName(filePath);
-        if (StringUtils.isEmpty(folderName)) {
+        if (StringUtil.isEmpty(folderName)) {
             return false;
         }
         File folder = new File(folderName);
@@ -322,7 +322,7 @@ public class FileUtils2 {
      * @return
      */
     public static boolean isFileExist(String filePath) {
-        if (StringUtils.isEmpty(filePath)) {
+        if (StringUtil.isEmpty(filePath)) {
             return false;
         }
         File file = new File(filePath);
@@ -336,7 +336,7 @@ public class FileUtils2 {
      * @return
      */
     public static boolean isFolderExist(String directoryPath) {
-        if (StringUtils.isEmpty(directoryPath)) {
+        if (StringUtil.isEmpty(directoryPath)) {
             return false;
         }
         File dire = new File(directoryPath);
@@ -350,7 +350,7 @@ public class FileUtils2 {
      * @return
      */
     public static boolean deleteFile(String path) {
-        if (StringUtils.isEmpty(path)) {
+        if (StringUtil.isEmpty(path)) {
             return true;
         }
 
@@ -411,7 +411,7 @@ public class FileUtils2 {
      * @return
      */
     public static long getFileSize(String path) {
-        if (StringUtils.isEmpty(path)) {
+        if (StringUtil.isEmpty(path)) {
             return -1;
         }
         File file = new File(path);

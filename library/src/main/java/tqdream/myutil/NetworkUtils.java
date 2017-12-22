@@ -29,6 +29,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
+import tqdream.utils.StringUtil;
+
 /**
  * 网络信息
  *
@@ -95,7 +97,7 @@ public class NetworkUtils {
                 while (inet.hasMoreElements()) {
                     InetAddress addr = inet.nextElement();
                     if (!addr.isLoopbackAddress()) {
-                        String ip = StringUtils.toUpperCase(addr.getHostAddress());
+                        String ip = StringUtil.toUpperCase(addr.getHostAddress());
                         boolean isIPv4 = addr instanceof Inet4Address;
                         if (useIPv4) {
                             if (isIPv4) {
@@ -233,7 +235,7 @@ public class NetworkUtils {
             Properties pr = new Properties();
             pr.load(process.getInputStream());
             re = pr.getProperty(interfaceName, "");
-            if (!StringUtils.isEmpty(re) && re.length() > 6) {
+            if (!StringUtil.isEmpty(re) && re.length() > 6) {
                 re = re.substring(1, re.length() - 1);
                 return re;
             }

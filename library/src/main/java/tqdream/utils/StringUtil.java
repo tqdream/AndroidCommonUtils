@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tqdream.myutil;
+package tqdream.utils;
 
 import android.text.TextUtils;
 
@@ -27,7 +27,7 @@ import java.util.Locale;
  *
  * @author venshine
  */
-public class StringUtils {
+public class StringUtil {
 
     /**
      * Judge whether a string is whitespace, empty ("") or null.

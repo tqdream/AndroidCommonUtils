@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

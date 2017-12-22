@@ -28,8 +28,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import tqdream.myutil.CollectionUtils;
-import tqdream.myutil.StringUtils;
+import tqdream.utils.CollectionUtils;
+import tqdream.utils.StringUtil;
 
 /**
  * 包操作
@@ -168,7 +168,7 @@ public class PackageUtils {
      * @return
      */
     public static boolean isInsatalled(Context context, String packageName) {
-        if (!StringUtils.isEmpty(packageName)) {
+        if (!StringUtil.isEmpty(packageName)) {
             List<PackageInfo> list = getInsatalledPackageInfos(context);
             if (!CollectionUtils.isEmpty(list)) {
                 for (PackageInfo pi : list) {
