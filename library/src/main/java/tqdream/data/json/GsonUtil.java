@@ -153,12 +153,12 @@ public class GsonUtil {
         return objMap;
     }
 
-    public static Object jsonToObject(String jsonStr, Class<?> cl) {
-        Object obj = null;
+    public static <T> T jsonToObject(String jsonStr, Class<T> cl) {
+        T t = null;
         if (gson != null) {
-            obj = gson.fromJson(jsonStr, cl);
+            t = gson.fromJson(jsonStr, cl);
         }
-        return obj;
+        return t;
     }
 
     /**

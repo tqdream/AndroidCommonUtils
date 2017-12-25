@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tqdream.myutil;
+package tqdream.data;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -25,6 +25,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
+import tqdream.data.json.GsonUtil;
 
 /**
  * Assets操作
@@ -101,7 +103,7 @@ public class AssetsUtils {
      */
     public static <T> ArrayList<T> parseJsonToArrayList(Context context, String jsonName) {
         String json = getTextFromAssets(context, jsonName);
-        return JsonUtils.jsonToArrayList(json);
+        return GsonUtil.jsonToArrayList(json);
     }
 
     /**
@@ -111,9 +113,9 @@ public class AssetsUtils {
      * @param jsonName
      * @return
      */
-    public static <T> List<T> parseJsonToList(Context context, String jsonName) {
+    public static List<?> parseJsonToList(Context context, String jsonName) {
         String json = getTextFromAssets(context, jsonName);
-        return JsonUtils.jsonToList(json);
+        return GsonUtil.jsonToList(json);
     }
 
     /**
@@ -126,7 +128,7 @@ public class AssetsUtils {
      */
     public static <T> T parseJsonToObject(Context context, String jsonName, Class<T> clazz) {
         String json = getTextFromAssets(context, jsonName);
-        return JsonUtils.jsonToObject(json, clazz);
+        return GsonUtil.jsonToObject(json, clazz);
     }
 
 }
