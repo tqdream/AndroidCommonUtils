@@ -12,7 +12,7 @@ import android.webkit.MimeTypeMap;
 
 import java.io.File;
 
-import tqdream.myutil.FileUtils2;
+import tqdream.utils.file.FileUtils4;
 
 /**
  * <pre>
@@ -35,7 +35,7 @@ public class IntentUtils2 {
      * @return intent
      */
     public static Intent getInstallAppIntent(String filePath) {
-        return getInstallAppIntent(FileUtils2.getFileByPath(filePath));
+        return getInstallAppIntent(FileUtils4.getFileByPath(filePath));
     }
 
     /**
@@ -51,7 +51,7 @@ public class IntentUtils2 {
         if (Build.VERSION.SDK_INT < 23) {
             type = "application/vnd.android.package-archive";
         } else {
-            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(FileUtils2.getFileExtension(file));
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(FileUtils4.getFileExtension(file));
         }
         intent.setDataAndType(Uri.fromFile(file), type);
         return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -113,7 +113,7 @@ public class IntentUtils2 {
      * @return intent
      */
     public static Intent getShareImageIntent(String content, String imagePath) {
-        return getShareImageIntent(content, FileUtils2.getFileByPath(imagePath));
+        return getShareImageIntent(content, FileUtils4.getFileByPath(imagePath));
     }
 
     /**
@@ -124,7 +124,7 @@ public class IntentUtils2 {
      * @return intent
      */
     public static Intent getShareImageIntent(String content, File image) {
-        if (!FileUtils2.isFileExists(image)) return null;
+        if (!FileUtils4.isFileExists(image)) return null;
         return getShareImageIntent(content, Uri.fromFile(image));
     }
 

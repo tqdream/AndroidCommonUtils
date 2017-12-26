@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils.system;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

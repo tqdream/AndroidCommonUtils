@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.other;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,12 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author taoqiang @create on 2017/2/10 13:59
@@ -163,103 +161,18 @@ public class CommonUtil {
         return false;
     }
 
-
-    /**
-     * 指定小数输出
-     *
-     * @param s      输入
-     * @param format 小数格式，比如保留两位0.00
-     * @return 输出结果
-     */
-    public static String decimalFormat(double s, String format) {
-        DecimalFormat decimalFormat = new DecimalFormat(format);
-        return decimalFormat.format(s);
-    }
-
-
-    /**
-     * 把Bitmap转Byte
-     *
-     * @param bitmap bitmap对象
-     * @return Bytes
-     */
-    public static byte[] bitmap2Bytes(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        return byteArrayOutputStream.toByteArray();
-    }
-
-
-    /**
-     * MD5加密
-     *
-     * @param plainText 需要加密的字符串
-     * @return 加密后字符串
-     */
-    public static String md5(String plainText) {
-        String result = "";
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(plainText.getBytes());
-            byte b[] = md.digest();
-
-            int i;
-
-            StringBuffer buf = new StringBuffer("");
-            for (int offset = 0; offset < b.length; offset++) {
-                i = b[offset];
-                if (i < 0)
-                    i += 256;
-                if (i < 16)
-                    buf.append("0");
-                buf.append(Integer.toHexString(i));
-            }
-            result = buf.toString().toLowerCase();// 32位的加密（转成小写）
-
-            buf.toString().substring(8, 24);// 16位的加密
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+    public static String simpleMapToJsonStr(Map<String, Object> values) {
+        if (values == null || values.isEmpty()) {
+            return "null";
         }
-        return result;
-    }
-
-    /**
-     * 安装apk
-     *
-     * @param context 上下文
-     * @param path    文件路劲
-     */
-    public static void installAPK(Context context, String path) {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(path)), "application/vnd.android.package-archive");
-        context.startActivity(intent);
-    }
-
-    /**
-     * 直接拨号，需要增加CALL_PHONE权限
-     *
-     * @param context 上下文
-     * @param phone   手机号码
-     */
-    public static void actionCall(Context context, String phone) {
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-        intent.setAction(Intent.ACTION_CALL);// 直接拨号
-        context.startActivity(intent);
-    }
-
-    /**
-     * 跳到拨号盘-拨打电话
-     *
-     * @param context 上下文
-     * @param phone   手机号码
-     */
-    public static void actionDial(Context context, String phone) {
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-        intent.setAction(Intent.ACTION_DIAL);// 拨号盘
-        context.startActivity(intent);
+        String jsonStr = "{";
+        Set<?> keySet = values.keySet();
+        for (Object key : keySet) {
+            jsonStr += "\"" + key + "\":\"" + values.get(key) + "\",";
+        }
+        jsonStr = jsonStr.substring(0, jsonStr.length() - 1);
+        jsonStr += "}";
+        return jsonStr;
     }
 
 }

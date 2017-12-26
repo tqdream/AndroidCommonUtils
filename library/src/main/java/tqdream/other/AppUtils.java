@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tqdream.myutil;
+package tqdream.other;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -44,6 +44,7 @@ import javax.security.auth.x500.X500Principal;
 import tqdream.utils.IntentUtils2;
 import tqdream.utils.ProcessUtils;
 import tqdream.utils.StringUtils;
+import tqdream.utils.security.EncryptUtils;
 import tqdream.utils.system.VibrationUtils;
 
 /**
@@ -810,17 +811,17 @@ public final class AppUtils {
      * @param dirs    目录
      * @return {@code true}: 成功<br>{@code false}: 失败
      */
-    public static boolean cleanAppData(Context context, File... dirs) {
-        boolean isSuccess = CleanUtils.cleanInternalCache(context);
-        isSuccess &= CleanUtils.cleanInternalDbs(context);
-        isSuccess &= CleanUtils.cleanInternalSP(context);
-        isSuccess &= CleanUtils.cleanInternalFiles(context);
-        isSuccess &= CleanUtils.cleanExternalCache(context);
-        for (File dir : dirs) {
-            isSuccess &= CleanUtils.cleanCustomCache(dir);
-        }
-        return isSuccess;
-    }
+//    public static boolean cleanAppData(Context context, File... dirs) {
+//        boolean isSuccess = CleanUtils.cleanInternalCache(context);
+//        isSuccess &= CleanUtils.cleanInternalDbs(context);
+//        isSuccess &= CleanUtils.cleanInternalSP(context);
+//        isSuccess &= CleanUtils.cleanInternalFiles(context);
+//        isSuccess &= CleanUtils.cleanExternalCache(context);
+//        for (File dir : dirs) {
+//            isSuccess &= CleanUtils.cleanCustomCache(dir);
+//        }
+//        return isSuccess;
+//    }
 
     //============================以上为添加的方法==================================
 

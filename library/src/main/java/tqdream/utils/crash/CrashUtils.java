@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import tqdream.myutil.FileUtils2;
+import tqdream.utils.file.FileUtils4;
 import tqdream.utils.file.CloseUtils;
 
 /**
@@ -78,7 +78,7 @@ public class CrashUtils implements UncaughtExceptionHandler {
     public void uncaughtException(Thread thread, Throwable throwable) {
         String now = new SimpleDateFormat("yy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         String fullPath = crashDir + now + ".txt";
-        if (!FileUtils2.createOrExistsFile(fullPath)) return;
+        if (!FileUtils4.createOrExistsFile(fullPath)) return;
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(new FileWriter(fullPath, false));

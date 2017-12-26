@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tqdream.myutil;
+package tqdream.utils;
 
 import android.app.Notification;
 import android.app.NotificationManager;

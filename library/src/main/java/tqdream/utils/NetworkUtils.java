@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tqdream.myutil;
+package tqdream.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -28,8 +28,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
-
-import tqdream.utils.StringUtil;
 
 /**
  * 网络信息

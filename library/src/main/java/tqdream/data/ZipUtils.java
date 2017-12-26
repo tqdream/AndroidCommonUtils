@@ -16,7 +16,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import tqdream.myutil.FileUtils2;
+import tqdream.utils.file.FileUtils4;
 import tqdream.utils.StringUtils;
 import tqdream.utils.file.CloseUtils;
 
@@ -84,7 +84,7 @@ public class ZipUtils {
      */
     public static boolean zipFiles(Collection<File> resFiles, String zipFilePath, String comment)
             throws IOException {
-        return zipFiles(resFiles, FileUtils2.getFileByPath(zipFilePath), comment);
+        return zipFiles(resFiles, FileUtils4.getFileByPath(zipFilePath), comment);
     }
 
     /**
@@ -151,7 +151,7 @@ public class ZipUtils {
      */
     public static boolean zipFile(String resFilePath, String zipFilePath, String comment)
             throws IOException {
-        return zipFile(FileUtils2.getFileByPath(resFilePath), FileUtils2.getFileByPath(zipFilePath), comment);
+        return zipFile(FileUtils4.getFileByPath(resFilePath), FileUtils4.getFileByPath(zipFilePath), comment);
     }
 
     /**
@@ -247,7 +247,7 @@ public class ZipUtils {
      */
     public static boolean unzipFiles(Collection<File> zipFiles, String destDirPath)
             throws IOException {
-        return unzipFiles(zipFiles, FileUtils2.getFileByPath(destDirPath));
+        return unzipFiles(zipFiles, FileUtils4.getFileByPath(destDirPath));
     }
 
     /**
@@ -277,7 +277,7 @@ public class ZipUtils {
      */
     public static boolean unzipFile(String zipFilePath, String destDirPath)
             throws IOException {
-        return unzipFile(FileUtils2.getFileByPath(zipFilePath), FileUtils2.getFileByPath(destDirPath));
+        return unzipFile(FileUtils4.getFileByPath(zipFilePath), FileUtils4.getFileByPath(destDirPath));
     }
 
     /**
@@ -304,8 +304,8 @@ public class ZipUtils {
      */
     public static List<File> unzipFileByKeyword(String zipFilePath, String destDirPath, String keyword)
             throws IOException {
-        return unzipFileByKeyword(FileUtils2.getFileByPath(zipFilePath),
-                FileUtils2.getFileByPath(destDirPath), keyword);
+        return unzipFileByKeyword(FileUtils4.getFileByPath(zipFilePath),
+                FileUtils4.getFileByPath(destDirPath), keyword);
     }
 
     /**
@@ -326,14 +326,14 @@ public class ZipUtils {
         while (entries.hasMoreElements()) {
             ZipEntry entry = ((ZipEntry) entries.nextElement());
             String entryName = entry.getName();
-            if (StringUtils.isEmpty(keyword) || FileUtils2.getFileName(entryName).toLowerCase().contains(keyword.toLowerCase())) {
+            if (StringUtils.isEmpty(keyword) || FileUtils4.getFileName(entryName).toLowerCase().contains(keyword.toLowerCase())) {
                 String filePath = destDir + File.separator + entryName;
                 File file = new File(filePath);
                 files.add(file);
                 if (entry.isDirectory()) {
-                    if (!FileUtils2.createOrExistsDir(file)) return null;
+                    if (!FileUtils4.createOrExistsDir(file)) return null;
                 } else {
-                    if (!FileUtils2.createOrExistsFile(file)) return null;
+                    if (!FileUtils4.createOrExistsFile(file)) return null;
                     InputStream in = null;
                     OutputStream out = null;
                     try {
@@ -362,7 +362,7 @@ public class ZipUtils {
      */
     public static List<String> getFilesPath(String zipFilePath)
             throws IOException {
-        return getFilesPath(FileUtils2.getFileByPath(zipFilePath));
+        return getFilesPath(FileUtils4.getFileByPath(zipFilePath));
     }
 
     /**
@@ -392,7 +392,7 @@ public class ZipUtils {
      */
     public static List<String> getComments(String zipFilePath)
             throws IOException {
-        return getComments(FileUtils2.getFileByPath(zipFilePath));
+        return getComments(FileUtils4.getFileByPath(zipFilePath));
     }
 
     /**
@@ -423,7 +423,7 @@ public class ZipUtils {
      */
     public static Enumeration<?> getEntries(String zipFilePath)
             throws IOException {
-        return getEntries(FileUtils2.getFileByPath(zipFilePath));
+        return getEntries(FileUtils4.getFileByPath(zipFilePath));
     }
 
     /**

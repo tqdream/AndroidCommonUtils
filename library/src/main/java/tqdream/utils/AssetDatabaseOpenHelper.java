@@ -1,13 +1,13 @@
-package tqdream.myutil;
+package tqdream.utils;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import java.io.InputStreamReader;
 
 import tqdream.utils.file.FileUtils;

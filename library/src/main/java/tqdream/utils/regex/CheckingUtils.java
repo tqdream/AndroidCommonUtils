@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tqdream.myutil;
+package tqdream.utils.regex;
 
 import java.io.File;
 import java.io.FileNotFoundException;

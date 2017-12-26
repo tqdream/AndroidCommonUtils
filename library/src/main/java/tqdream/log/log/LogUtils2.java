@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.log.log;
 
 import android.content.Context;
 import android.os.Environment;
@@ -12,8 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import tqdream.utils.file.FileUtils4;
 import tqdream.utils.file.CloseUtils;
-import tqdream.utils.system.VibrationUtils;
 
 /**
  * <pre>
@@ -23,9 +23,9 @@ import tqdream.utils.system.VibrationUtils;
  *     desc  : 日志相关工具类
  * </pre>
  */
-public class LogUtils {
+public class LogUtils2 {
 
-    private LogUtils() {
+    private LogUtils2() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -51,10 +51,10 @@ public class LogUtils {
         } else {
             dir = context.getCacheDir().getPath() + File.separator;
         }
-        LogUtils.logSwitch = logSwitch;
-        LogUtils.log2FileSwitch = log2FileSwitch;
-        LogUtils.logFilter = logFilter;
-        LogUtils.tag = tag;
+        LogUtils2.logSwitch = logSwitch;
+        LogUtils2.log2FileSwitch = log2FileSwitch;
+        LogUtils2.logFilter = logFilter;
+        LogUtils2.tag = tag;
     }
 
     /**
@@ -101,10 +101,10 @@ public class LogUtils {
         }
 
         public void create() {
-            LogUtils.logSwitch = logSwitch;
-            LogUtils.log2FileSwitch = log2FileSwitch;
-            LogUtils.logFilter = logFilter;
-            LogUtils.tag = tag;
+            LogUtils2.logSwitch = logSwitch;
+            LogUtils2.log2FileSwitch = log2FileSwitch;
+            LogUtils2.logFilter = logFilter;
+            LogUtils2.tag = tag;
         }
     }
 
@@ -295,7 +295,7 @@ public class LogUtils {
         Date now = new Date();
         String date = new SimpleDateFormat("MM-dd", Locale.getDefault()).format(now);
         String fullPath = dir + date + ".txt";
-        if (!VibrationUtils.FileUtils.createOrExistsFile(fullPath)) return;
+        if (!FileUtils4.createOrExistsFile(fullPath)) return;
         String time = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(now);
         String dateLogContent = time + ":" + type + ":" + tag + ":" + content + '\n';
         BufferedWriter bw = null;

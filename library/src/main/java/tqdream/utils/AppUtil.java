@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;

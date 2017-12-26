@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;

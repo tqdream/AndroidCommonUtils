@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils.system;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +14,7 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
+import tqdream.log.log.LogUtils2;
 import tqdream.utils.ShellUtils;
 
 /**
@@ -24,9 +25,9 @@ import tqdream.utils.ShellUtils;
  *     desc  : 设备相关工具类
  * </pre>
  */
-public class DeviceUtils {
+public class DeviceUtils2 {
 
-    private DeviceUtils() {
+    private DeviceUtils2() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -62,12 +63,12 @@ public class DeviceUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     private static boolean isRootByShell() {
-        ShellUtils.CommandResult result = ShellUtils.execCmd("echo root", true);
+        ShellUtils.CommandResult result = ShellUtils.execCommand("echo root", true);
         if (result.result == 0) {
             return true;
         }
         if (result.errorMsg != null) {
-            LogUtils.d("isRootByShell", result.errorMsg);
+            LogUtils2.d("isRootByShell", result.errorMsg);
         }
         return false;
     }
@@ -170,11 +171,11 @@ public class DeviceUtils {
      * @return MAC地址
      */
     private static String getMacAddressByFile() {
-        ShellUtils.CommandResult result = ShellUtils.execCmd("getprop wifi.interface", false);
+        ShellUtils.CommandResult result = ShellUtils.execCommand("getprop wifi.interface", false);
         if (result.result == 0) {
             String name = result.successMsg;
             if (name != null) {
-                result = ShellUtils.execCmd("cat /sys/class/net/" + name + "/address", false);
+                result = ShellUtils.execCommand("cat /sys/class/net/" + name + "/address", false);
                 if (result.result == 0) {
                     if (result.successMsg != null) {
                         return result.successMsg;
@@ -217,7 +218,7 @@ public class DeviceUtils {
      * <p>需要root权限</p>
      */
     public static void shutdown() {
-        ShellUtils.execCmd("reboot -p", true);
+        ShellUtils.execCommand("reboot -p", true);
     }
 
     /**
@@ -238,7 +239,7 @@ public class DeviceUtils {
      * <p>需要root权限</p>
      */
     public static void reboot() {
-        ShellUtils.execCmd("reboot", true);
+        ShellUtils.execCommand("reboot", true);
     }
 
     /**

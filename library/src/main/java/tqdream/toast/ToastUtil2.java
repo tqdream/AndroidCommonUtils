@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-import tqdream.myutil.LogUtils;
+import tqdream.log.log.LogUtils2;
 
 /**
  * <pre>
@@ -252,7 +252,7 @@ public class ToastUtil2 {
      * @param duration 显示时长
      */
     private static void showToast(Context context, CharSequence text, int duration) {
-        LogUtils.d(sToast == null);
+        LogUtils2.d(sToast == null);
         if (isJumpWhenMore) cancelToast();
         if (sToast == null) {
             sToast = Toast.makeText(context, text, duration);

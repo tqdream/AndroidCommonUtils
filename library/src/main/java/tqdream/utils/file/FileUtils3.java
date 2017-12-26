@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils.file;
 
 import android.app.Activity;
 import android.content.CursorLoader;
@@ -35,7 +35,7 @@ import java.util.List;
  * @更新描述 ${TODO}
  */
 
-public class FileUtils {
+public class FileUtils3 {
     public static final long GB = 1073741824; // 1024 * 1024 * 1024
     public static final long MB = 1048576; // 1024 * 1024
     public static final long KB = 1024;
@@ -56,7 +56,7 @@ public class FileUtils {
     /**
      * Don't let anyone instantiate this class.
      */
-    private FileUtils() {
+    private FileUtils3() {
         throw new Error("Do not need instantiate!");
     }
 
@@ -788,7 +788,7 @@ public class FileUtils {
      * directory already exists, false one of the directories can not be
      * created.
      * <ul>
-     * <li>if {@link FileUtils#getFolderName(String)} return null,
+     * <li>if {@link FileUtils3#getFolderName(String)} return null,
      * return false</li>
      * <li>if target directory already exists, return true</li>
      * <li>return {@link java.io.File#makeFolder}</li>

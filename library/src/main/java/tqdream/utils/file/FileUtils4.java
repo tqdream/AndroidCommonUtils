@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils.file;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -19,10 +19,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import tqdream.utils.file.CloseUtils;
-import tqdream.myutil.ConvertUtils;
-import tqdream.utils.pinyin.PinYinUtil;
-import tqdream.myutil.EncryptUtils;
+import tqdream.utils.ConvertUtils;
+import tqdream.utils.EmptyUtils;
+import tqdream.utils.security.EncryptUtils;
+
+import static tqdream.utils.ConstUtil.ConstUtils.KB;
 
 /**
  * <pre>
@@ -32,9 +33,9 @@ import tqdream.myutil.EncryptUtils;
  *     desc  : 文件相关工具类
  * </pre>
  */
-public static class FileUtils2 {
+public class FileUtils4 {
 
-    private FileUtils2() {
+    private FileUtils4() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -45,7 +46,7 @@ public static class FileUtils2 {
      * @return 文件
      */
     public static File getFileByPath(String filePath) {
-        return PinYinUtil.isSpace(filePath) ? null : new File(filePath);
+        return EmptyUtils.isEmpty(filePath) ? null : new File(filePath);
     }
 
     /**
@@ -819,7 +820,7 @@ public static class FileUtils2 {
             String line;
             int curLine = 1;
             List<String> list = new ArrayList<>();
-            if (PinYinUtil.isSpace(charsetName)) {
+            if (EmptyUtils.isEmpty(charsetName)) {
                 reader = new BufferedReader(new FileReader(file));
             } else {
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charsetName));
@@ -861,7 +862,7 @@ public static class FileUtils2 {
         BufferedReader reader = null;
         try {
             StringBuilder sb = new StringBuilder();
-            if (PinYinUtil.isSpace(charsetName)) {
+            if (EmptyUtils.isEmpty(charsetName)) {
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
             } else {
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charsetName));
@@ -1040,7 +1041,7 @@ public static class FileUtils2 {
      * @return filePath最长目录
      */
     public static String getDirName(String filePath) {
-        if (PinYinUtil.isSpace(filePath)) return filePath;
+        if (EmptyUtils.isEmpty(filePath)) return filePath;
         int lastSep = filePath.lastIndexOf(File.separator);
         return lastSep == -1 ? "" : filePath.substring(0, lastSep + 1);
     }
@@ -1063,7 +1064,7 @@ public static class FileUtils2 {
      * @return 文件名
      */
     public static String getFileName(String filePath) {
-        if (PinYinUtil.isSpace(filePath)) return filePath;
+        if (EmptyUtils.isEmpty(filePath)) return filePath;
         int lastSep = filePath.lastIndexOf(File.separator);
         return lastSep == -1 ? filePath : filePath.substring(lastSep + 1);
     }
@@ -1086,7 +1087,7 @@ public static class FileUtils2 {
      * @return 不带拓展名的文件名
      */
     public static String getFileNameNoExtension(String filePath) {
-        if (PinYinUtil.isSpace(filePath)) return filePath;
+        if (EmptyUtils.isEmpty(filePath)) return filePath;
         int lastPoi = filePath.lastIndexOf('.');
         int lastSep = filePath.lastIndexOf(File.separator);
         if (lastSep == -1) {
@@ -1116,7 +1117,7 @@ public static class FileUtils2 {
      * @return 文件拓展名
      */
     public static String getFileExtension(String filePath) {
-        if (PinYinUtil.isSpace(filePath)) return filePath;
+        if (EmptyUtils.isEmpty(filePath)) return filePath;
         int lastPoi = filePath.lastIndexOf('.');
         int lastSep = filePath.lastIndexOf(File.separator);
         if (lastPoi == -1 || lastSep >= lastPoi) return "";

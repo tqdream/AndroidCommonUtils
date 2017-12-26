@@ -12,7 +12,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
-import tqdream.myutil.ConvertUtils;
 import tqdream.utils.file.CloseUtils;
 
 /**

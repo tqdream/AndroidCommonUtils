@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -18,14 +18,14 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
-import tqdream.utils.file.CloseUtils;
 import tqdream.utils.ConstUtil.ConstUtils;
-import tqdream.utils.pinyin.PinYinUtil;
+import tqdream.utils.EmptyUtils;
+import tqdream.utils.file.CloseUtils;
 
-import static com.blankj.utilcode.utils.ConstUtils.BYTE;
-import static com.blankj.utilcode.utils.ConstUtils.GB;
-import static com.blankj.utilcode.utils.ConstUtils.KB;
-import static com.blankj.utilcode.utils.ConstUtils.MB;
+import static tqdream.utils.ConstUtil.ConstUtils.BYTE;
+import static tqdream.utils.ConstUtil.ConstUtils.GB;
+import static tqdream.utils.ConstUtil.ConstUtils.KB;
+import static tqdream.utils.ConstUtil.ConstUtils.MB;
 
 /**
  * <pre>
@@ -72,7 +72,7 @@ public class ConvertUtils {
      * @return 字节数组
      */
     public static byte[] hexString2Bytes(String hexString) {
-        if (PinYinUtil.isSpace(hexString)) return null;
+        if (EmptyUtils.isEmpty(hexString)) return null;
         int len = hexString.length();
         if (len % 2 != 0) {
             hexString = "0" + hexString;
@@ -349,7 +349,7 @@ public class ConvertUtils {
      * @return 字符串
      */
     public static String inputStream2String(InputStream is, String charsetName) {
-        if (is == null || PinYinUtil.isSpace(charsetName)) return null;
+        if (is == null || EmptyUtils.isEmpty(charsetName)) return null;
         try {
             return new String(inputStream2Bytes(is), charsetName);
         } catch (UnsupportedEncodingException e) {
@@ -366,7 +366,7 @@ public class ConvertUtils {
      * @return 输入流
      */
     public static InputStream string2InputStream(String string, String charsetName) {
-        if (string == null || PinYinUtil.isSpace(charsetName)) return null;
+        if (string == null || EmptyUtils.isEmpty(charsetName)) return null;
         try {
             return new ByteArrayInputStream(string.getBytes(charsetName));
         } catch (UnsupportedEncodingException e) {
@@ -383,7 +383,7 @@ public class ConvertUtils {
      * @return 字符串
      */
     public static String outputStream2String(OutputStream out, String charsetName) {
-        if (out == null || PinYinUtil.isSpace(charsetName)) return null;
+        if (out == null || EmptyUtils.isEmpty(charsetName)) return null;
         try {
             return new String(outputStream2Bytes(out), charsetName);
         } catch (UnsupportedEncodingException e) {
@@ -400,7 +400,7 @@ public class ConvertUtils {
      * @return 输入流
      */
     public static OutputStream string2OutputStream(String string, String charsetName) {
-        if (string == null || PinYinUtil.isSpace(charsetName)) return null;
+        if (string == null || EmptyUtils.isEmpty(charsetName)) return null;
         try {
             return bytes2OutputStream(string.getBytes(charsetName));
         } catch (UnsupportedEncodingException e) {

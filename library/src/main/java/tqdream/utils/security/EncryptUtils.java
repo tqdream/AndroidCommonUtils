@@ -1,4 +1,4 @@
-package tqdream.myutil;
+package tqdream.utils.security;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,10 +14,11 @@ import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import tqdream.utils.file.FileUtils4;
 import tqdream.utils.file.CloseUtils;
-import tqdream.utils.system.VibrationUtils;
 
-import static tqdream.myutil.ConvertUtils.bytes2HexString;
+import static tqdream.utils.ConvertUtils.bytes2HexString;
+import static tqdream.utils.ConvertUtils.hexString2Bytes;
 
 /**
  * <pre>
@@ -127,7 +128,7 @@ public class EncryptUtils {
      * @return 文件的16进制密文
      */
     public static String encryptMD5File2String(String filePath) {
-        return encryptMD5File2String(VibrationUtils.FileUtils.getFileByPath(filePath));
+        return encryptMD5File2String(FileUtils4.getFileByPath(filePath));
     }
 
     /**
@@ -137,7 +138,7 @@ public class EncryptUtils {
      * @return 文件的MD5校验码
      */
     public static byte[] encryptMD5File(String filePath) {
-        return encryptMD5File(VibrationUtils.FileUtils.getFileByPath(filePath));
+        return encryptMD5File(FileUtils4.getFileByPath(filePath));
     }
 
     /**
