@@ -1,6 +1,8 @@
-package tqdream.utils;
+package com.blankj.utilcode.util;
 
 import android.os.Build;
+import android.support.v4.util.LongSparseArray;
+import android.support.v4.util.SimpleArrayMap;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
@@ -14,11 +16,11 @@ import java.util.Map;
  * <pre>
  *     author: Blankj
  *     blog  : http://blankj.com
- *     time  : 2016/9/28
+ *     time  : 2016/09/28
  *     desc  : 判空相关工具类
  * </pre>
  */
-public class EmptyUtils {
+public final class EmptyUtils {
 
     private EmptyUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
@@ -30,11 +32,11 @@ public class EmptyUtils {
      * @param obj 对象
      * @return {@code true}: 为空<br>{@code false}: 不为空
      */
-    public static boolean isEmpty(Object obj) {
+    public static boolean isEmpty(final Object obj) {
         if (obj == null) {
             return true;
         }
-        if (obj instanceof String && obj.toString().length() == 0) {
+        if (obj instanceof CharSequence && obj.toString().length() == 0) {
             return true;
         }
         if (obj.getClass().isArray() && Array.getLength(obj) == 0) {
@@ -44,6 +46,9 @@ public class EmptyUtils {
             return true;
         }
         if (obj instanceof Map && ((Map) obj).isEmpty()) {
+            return true;
+        }
+        if (obj instanceof SimpleArrayMap && ((SimpleArrayMap) obj).isEmpty()) {
             return true;
         }
         if (obj instanceof SparseArray && ((SparseArray) obj).size() == 0) {
@@ -60,6 +65,14 @@ public class EmptyUtils {
                 return true;
             }
         }
+        if (obj instanceof LongSparseArray && ((LongSparseArray) obj).size() == 0) {
+            return true;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            if (obj instanceof android.util.LongSparseArray && ((android.util.LongSparseArray) obj).size() == 0) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -69,15 +82,16 @@ public class EmptyUtils {
      * @param obj 对象
      * @return {@code true}: 非空<br>{@code false}: 空
      */
-    public static boolean isNotEmpty(Object obj) {
+    public static boolean isNotEmpty(final Object obj) {
         return !isEmpty(obj);
     }
 
+    //●════════════════以下为添加的方法═════════════════════════●
     public static boolean isNull(Object o) {
         return o == null;
     }
 
     public static boolean isNotNull(Object o) {
-        return o == null;
+        return o != null;
     }
 }

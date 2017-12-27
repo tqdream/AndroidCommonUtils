@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -174,5 +175,35 @@ public class CommonUtil {
         jsonStr += "}";
         return jsonStr;
     }
+
+
+    /**
+     * ListView中提前测量View尺寸，如headerView
+     * <p>用的时候去掉注释拷贝到ListView中即可</p>
+     * <p>参照以下注释代码</p>
+     *
+     * @param view 视图
+     */
+    public static void measureViewInLV(View view) {
+        Log.d("tips", "U should copy the following code.");
+        /*
+        ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p == null) {
+            p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        int width = ViewGroup.getChildMeasureSpec(0, 0, p.width);
+        int height;
+        int tempHeight = p.height;
+        if (tempHeight > 0) {
+            height = MeasureSpec.makeMeasureSpec(tempHeight,
+                    MeasureSpec.EXACTLY);
+        } else {
+            height = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+        }
+        view.measure(width, height);
+        */
+    }
+
 
 }

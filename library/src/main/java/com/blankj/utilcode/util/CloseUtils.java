@@ -1,4 +1,4 @@
-package tqdream.utils.file;
+package com.blankj.utilcode.util;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -7,22 +7,22 @@ import java.io.IOException;
  * <pre>
  *     author: Blankj
  *     blog  : http://blankj.com
- *     time  : 2016/10/9
+ *     time  : 2016/10/09
  *     desc  : 关闭相关工具类
  * </pre>
  */
-public class CloseUtils {
+public final class CloseUtils {
 
     private CloseUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
     /**
-     * 关闭IO
+     * 关闭 IO
      *
-     * @param closeables closeable
+     * @param closeables closeables
      */
-    public static void closeIO(Closeable... closeables) {
+    public static void closeIO(final Closeable... closeables) {
         if (closeables == null) return;
         for (Closeable closeable : closeables) {
             if (closeable != null) {
@@ -30,18 +30,17 @@ public class CloseUtils {
                     closeable.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("IOException occurred. ", e);
                 }
             }
         }
     }
 
     /**
-     * 安静关闭IO
+     * 安静关闭 IO
      *
-     * @param closeables closeable
+     * @param closeables closeables
      */
-    public static void closeIOQuietly(Closeable... closeables) {
+    public static void closeIOQuietly(final Closeable... closeables) {
         if (closeables == null) return;
         for (Closeable closeable : closeables) {
             if (closeable != null) {

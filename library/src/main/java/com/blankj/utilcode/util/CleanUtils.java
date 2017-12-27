@@ -156,4 +156,39 @@ public final class CleanUtils {
         }
         return true;
     }
+
+
+    //●════════════════以下为添加的方法═════════════════════════●
+    /**
+     * 清除 App 所有数据
+     *
+     * @param dirPaths 目录路径
+     * @return {@code true}: 成功<br>{@code false}: 失败
+     */
+    public static boolean cleanAppData(final String... dirPaths) {
+        File[] dirs = new File[dirPaths.length];
+        int i = 0;
+        for (String dirPath : dirPaths) {
+            dirs[i++] = new File(dirPath);
+        }
+        return cleanAppData(dirs);
+    }
+
+    /**
+     * 清除 App 所有数据
+     *
+     * @param dirs 目录
+     * @return {@code true}: 成功<br>{@code false}: 失败
+     */
+    public static boolean cleanAppData(final File... dirs) {
+        boolean isSuccess = CleanUtils.cleanInternalCache();
+        isSuccess &= CleanUtils.cleanInternalDbs();
+        isSuccess &= CleanUtils.cleanInternalSP();
+        isSuccess &= CleanUtils.cleanInternalFiles();
+        isSuccess &= CleanUtils.cleanExternalCache();
+        for (File dir : dirs) {
+            isSuccess &= CleanUtils.cleanCustomCache(dir);
+        }
+        return isSuccess;
+    }
 }
