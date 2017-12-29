@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tqdream.utils.ConstUtil;
+package tqdream.constant;
 
 /**
  * 常用符号

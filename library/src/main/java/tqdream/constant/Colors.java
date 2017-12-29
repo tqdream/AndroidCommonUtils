@@ -1,4 +1,4 @@
-package tqdream.utils.ConstUtil; /**
+package tqdream.constant; /**
  * Copyright 2014 Zhenguo Jin (jinzhenguo1990@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

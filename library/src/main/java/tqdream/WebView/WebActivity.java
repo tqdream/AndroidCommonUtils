@@ -44,8 +44,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.EmptyUtils;
+
 import tqdream.utils.screen.DensityUtil;
-import tqdream.utils.EmptyUtils;
 
 /**
  * Web页面

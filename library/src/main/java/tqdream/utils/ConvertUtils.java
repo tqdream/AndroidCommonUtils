@@ -18,14 +18,14 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 
-import tqdream.utils.ConstUtil.ConstUtils;
+import tqdream.constant.ConstUtils;
 import tqdream.utils.EmptyUtils;
 import tqdream.utils.file.CloseUtils;
 
-import static tqdream.utils.ConstUtil.ConstUtils.BYTE;
-import static tqdream.utils.ConstUtil.ConstUtils.GB;
-import static tqdream.utils.ConstUtil.ConstUtils.KB;
-import static tqdream.utils.ConstUtil.ConstUtils.MB;
+import static tqdream.constant.ConstUtils.BYTE;
+import static tqdream.constant.ConstUtils.GB;
+import static tqdream.constant.ConstUtils.KB;
+import static tqdream.constant.ConstUtils.MB;
 
 /**
  * <pre>

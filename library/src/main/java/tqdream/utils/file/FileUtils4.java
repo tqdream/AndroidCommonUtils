@@ -23,7 +23,7 @@ import tqdream.utils.ConvertUtils;
 import tqdream.utils.EmptyUtils;
 import tqdream.utils.security.EncryptUtils;
 
-import static tqdream.utils.ConstUtil.ConstUtils.KB;
+import static tqdream.constant.ConstUtils.KB;
 
 /**
  * <pre>
