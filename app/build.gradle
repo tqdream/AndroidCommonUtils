@@ -70,6 +70,7 @@ android {
         // 设置给定问题的严重级别（severity）为ignore （和不检查这个问题一样）
         ignore 'TypographyQuotes'
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {
