@@ -1,4 +1,4 @@
-package tqdream.receiver;
+package tqdream.ok.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
-import tqdream.log.Log;
+import com.blankj.utilcode.util.EmptyUtils;
 
-import tqdream.utils.EmptyUtils;
+import tqdream.log.Log;
 
 /**
  * <uses-permission android:name="android.permission.READ_PHONE_STATE"/>

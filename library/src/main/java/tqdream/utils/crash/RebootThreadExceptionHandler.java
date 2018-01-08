@@ -26,7 +26,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import tqdream.receiver.StartAppReceiver;
+import tqdream.ok.receiver.StartAppReceiver;
 
 /**
  * 重启线程异常处理器，当发生未知异常时会提示异常信息并在一秒钟后重新启动应用

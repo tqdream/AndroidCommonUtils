@@ -1,4 +1,4 @@
-package tqdream.utils.image;
+package tqdream.utils.image.effects;
 
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;

@@ -98,7 +98,7 @@ public class StringUtils {
         return asc;
     }
 
-    public static String convert(String str) {
+    public static String  convert(String str) {
         String result = null;
         int ascii = getChsAscii(str);
         if (ascii > 0 && ascii < 160) {

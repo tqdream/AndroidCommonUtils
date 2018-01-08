@@ -1,4 +1,4 @@
-package tqdream.receiver; /**
+package tqdream.ok.receiver; /**
  * Copyright 2014 Zhenguo Jin (jinzhenguo1990@gmail.com)
  * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");

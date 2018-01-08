@@ -1,9 +1,12 @@
-package tqdream.utils;
+package tqdream.ok;
 
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+
+import com.blankj.utilcode.util.CloseUtils;
+import com.blankj.utilcode.util.ConvertUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -12,7 +15,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
-import tqdream.utils.file.CloseUtils;
 
 /**
  * <pre>
@@ -93,7 +95,7 @@ public class SDCardUtils {
         long blockSize, availableBlocks;
         availableBlocks = stat.getAvailableBlocksLong();
         blockSize = stat.getBlockSizeLong();
-        return ConvertUtils.byte2FitSize(availableBlocks * blockSize);
+        return ConvertUtils.byte2FitMemorySize(availableBlocks * blockSize);
     }
 
     /**
