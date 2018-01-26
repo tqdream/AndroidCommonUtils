@@ -1,4 +1,4 @@
-package tqdream.utils.math;
+package tqdream.ok.math;
 
 //~--- JDK imports ------------------------------------------------------------
 
