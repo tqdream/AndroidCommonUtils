@@ -1,4 +1,4 @@
-package tqdream.ok.base;
+package tqdream.ok;
 
 /**
  * Singleton helper class for lazily initialization.

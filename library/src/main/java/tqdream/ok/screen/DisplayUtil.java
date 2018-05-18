@@ -1,4 +1,4 @@
-package tqdream.utils.screen;
+package tqdream.ok.screen;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;

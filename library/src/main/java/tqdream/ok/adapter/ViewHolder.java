@@ -1,4 +1,4 @@
-package tqdream.adapter;
+package tqdream.ok.adapter;
 
 /**
  * Created by Administrator on 2016/6/7.

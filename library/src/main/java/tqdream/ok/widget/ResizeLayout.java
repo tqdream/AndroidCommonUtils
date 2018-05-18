@@ -1,4 +1,4 @@
-package tqdream;
+package tqdream.ok.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

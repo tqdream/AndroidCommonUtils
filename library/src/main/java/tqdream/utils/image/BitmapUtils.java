@@ -46,8 +46,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static tqdream.utils.screen.DisplayUtil.getScreenH;
-import static tqdream.utils.screen.DisplayUtil.getScreenW;
+import static tqdream.ok.screen.DisplayUtil.getScreenH;
+import static tqdream.ok.screen.DisplayUtil.getScreenW;
 
 /**
  * Bitmap转化、操作和各种效果

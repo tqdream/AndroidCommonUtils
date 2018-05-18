@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-package tqdream.utils.screen;
+package tqdream.ok.screen;
 
 import android.content.Context;
 import android.util.TypedValue;

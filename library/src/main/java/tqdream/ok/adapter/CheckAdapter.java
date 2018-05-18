@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tqdream.ok.base;
+package tqdream.ok.adapter;
 
 import android.view.View;
 import android.widget.BaseAdapter;

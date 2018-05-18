@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidcommonutil.tqdreamlibrary.R;
-import tqdream.utils.screen.DensityUtil;
+import tqdream.ok.screen.DensityUtil;
 
 /**
  * 作者： 巴掌 on 16/8/23 22:00
