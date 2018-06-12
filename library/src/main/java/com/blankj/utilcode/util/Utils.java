@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

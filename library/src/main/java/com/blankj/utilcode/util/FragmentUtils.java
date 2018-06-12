@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;

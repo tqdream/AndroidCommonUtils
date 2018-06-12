@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -77,7 +77,7 @@ public final class DeviceUtils {
     @SuppressLint("HardwareIds")
     public static String getAndroidID() {
         String id = Settings.Secure.getString(
-                Utils.getApp().getContentResolver(),
+                utilcode.util.Utils.getApp().getContentResolver(),
                 Settings.Secure.ANDROID_ID
         );
         return id == null ? "" : id;
@@ -140,7 +140,7 @@ public final class DeviceUtils {
     @SuppressLint({"HardwareIds", "MissingPermission"})
     private static String getMacAddressByWifiInfo() {
         try {
-            Context context = Utils.getApp().getApplicationContext();
+            Context context = utilcode.util.Utils.getApp().getApplicationContext();
             WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             if (wifi != null) {
                 WifiInfo info = wifi.getConnectionInfo();
@@ -218,11 +218,11 @@ public final class DeviceUtils {
     }
 
     private static String getMacAddressByFile() {
-        ShellUtils.CommandResult result = ShellUtils.execCmd("getprop wifi.interface", false);
+        ShellUtils.CommandResult result = utilcode.util.ShellUtils.execCmd("getprop wifi.interface", false);
         if (result.result == 0) {
             String name = result.successMsg;
             if (name != null) {
-                result = ShellUtils.execCmd("cat /sys/class/net/" + name + "/address", false);
+                result = utilcode.util.ShellUtils.execCmd("cat /sys/class/net/" + name + "/address", false);
                 if (result.result == 0) {
                     String address = result.successMsg;
                     if (address != null && address.length() > 0) {
@@ -285,10 +285,10 @@ public final class DeviceUtils {
      * in manifest.</p>
      */
     public static void shutdown() {
-        ShellUtils.execCmd("reboot -p", true);
+        utilcode.util.ShellUtils.execCmd("reboot -p", true);
         Intent intent = new Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN");
         intent.putExtra("android.intent.extra.KEY_CONFIRM", false);
-        Utils.getApp().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        utilcode.util.Utils.getApp().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     /**
@@ -297,12 +297,12 @@ public final class DeviceUtils {
      * or hold {@code android:sharedUserId="android.uid.system"} in manifest.</p>
      */
     public static void reboot() {
-        ShellUtils.execCmd("reboot", true);
+        utilcode.util.ShellUtils.execCmd("reboot", true);
         Intent intent = new Intent(Intent.ACTION_REBOOT);
         intent.putExtra("nowait", 1);
         intent.putExtra("interval", 1);
         intent.putExtra("window", 0);
-        Utils.getApp().sendBroadcast(intent);
+        utilcode.util.Utils.getApp().sendBroadcast(intent);
     }
 
     /**
@@ -316,7 +316,7 @@ public final class DeviceUtils {
      */
     public static void reboot(final String reason) {
         PowerManager mPowerManager =
-                (PowerManager) Utils.getApp().getSystemService(Context.POWER_SERVICE);
+                (PowerManager) utilcode.util.Utils.getApp().getSystemService(Context.POWER_SERVICE);
         try {
             if (mPowerManager == null) return;
             mPowerManager.reboot(reason);
@@ -330,7 +330,7 @@ public final class DeviceUtils {
      * <p>Requires root permission.</p>
      */
     public static void reboot2Recovery() {
-        ShellUtils.execCmd("reboot recovery", true);
+        utilcode.util.ShellUtils.execCmd("reboot recovery", true);
     }
 
     /**
@@ -338,6 +338,6 @@ public final class DeviceUtils {
      * <p>Requires root permission.</p>
      */
     public static void reboot2Bootloader() {
-        ShellUtils.execCmd("reboot bootloader", true);
+        utilcode.util.ShellUtils.execCmd("reboot bootloader", true);
     }
 }

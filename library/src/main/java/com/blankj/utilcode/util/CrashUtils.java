@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.annotation.SuppressLint;
 import android.content.pm.PackageInfo;
@@ -52,9 +52,9 @@ public final class CrashUtils {
 
     static {
         try {
-            PackageInfo pi = Utils.getApp()
+            PackageInfo pi = utilcode.util.Utils.getApp()
                     .getPackageManager()
-                    .getPackageInfo(Utils.getApp().getPackageName(), 0);
+                    .getPackageInfo(utilcode.util.Utils.getApp().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -197,10 +197,10 @@ public final class CrashUtils {
             dir = crashDirPath.endsWith(FILE_SEP) ? crashDirPath : crashDirPath + FILE_SEP;
         }
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                && Utils.getApp().getExternalCacheDir() != null)
-            defaultDir = Utils.getApp().getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
+                && utilcode.util.Utils.getApp().getExternalCacheDir() != null)
+            defaultDir = utilcode.util.Utils.getApp().getExternalCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         else {
-            defaultDir = Utils.getApp().getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
+            defaultDir = utilcode.util.Utils.getApp().getCacheDir() + FILE_SEP + "crash" + FILE_SEP;
         }
         sOnCrashListener = onCrashListener;
         Thread.setDefaultUncaughtExceptionHandler(UNCAUGHT_EXCEPTION_HANDLER);

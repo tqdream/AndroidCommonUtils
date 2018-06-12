@@ -1,4 +1,4 @@
-package utilcode.constant;
+package com.blankj.utilcode.constant;
 
 /**
  * <pre>

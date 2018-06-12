@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
@@ -32,7 +32,7 @@ public final class ServiceUtils {
      */
     public static Set getAllRunningServices() {
         ActivityManager am =
-                (ActivityManager) Utils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
+                (ActivityManager) utilcode.util.Utils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
         if (am == null) return Collections.emptySet();
         List<RunningServiceInfo> info = am.getRunningServices(0x7FFFFFFF);
         Set<String> names = new HashSet<>();
@@ -62,8 +62,8 @@ public final class ServiceUtils {
      * @param cls The service class.
      */
     public static void startService(final Class<?> cls) {
-        Intent intent = new Intent(Utils.getApp(), cls);
-        Utils.getApp().startService(intent);
+        Intent intent = new Intent(utilcode.util.Utils.getApp(), cls);
+        utilcode.util.Utils.getApp().startService(intent);
     }
 
     /**
@@ -88,8 +88,8 @@ public final class ServiceUtils {
      * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean stopService(final Class<?> cls) {
-        Intent intent = new Intent(Utils.getApp(), cls);
-        return Utils.getApp().stopService(intent);
+        Intent intent = new Intent(utilcode.util.Utils.getApp(), cls);
+        return utilcode.util.Utils.getApp().stopService(intent);
     }
 
     /**
@@ -137,8 +137,8 @@ public final class ServiceUtils {
     public static void bindService(final Class<?> cls,
                                    final ServiceConnection conn,
                                    final int flags) {
-        Intent intent = new Intent(Utils.getApp(), cls);
-        Utils.getApp().bindService(intent, conn, flags);
+        Intent intent = new Intent(utilcode.util.Utils.getApp(), cls);
+        utilcode.util.Utils.getApp().bindService(intent, conn, flags);
     }
 
     /**
@@ -147,7 +147,7 @@ public final class ServiceUtils {
      * @param conn The ServiceConnection object.
      */
     public static void unbindService(final ServiceConnection conn) {
-        Utils.getApp().unbindService(conn);
+        utilcode.util.Utils.getApp().unbindService(conn);
     }
 
     /**
@@ -168,7 +168,7 @@ public final class ServiceUtils {
      */
     public static boolean isServiceRunning(final String className) {
         ActivityManager am =
-                (ActivityManager) Utils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
+                (ActivityManager) utilcode.util.Utils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
         if (am == null) return false;
         List<RunningServiceInfo> info = am.getRunningServices(0x7FFFFFFF);
         if (info == null || info.size() == 0) return false;

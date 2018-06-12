@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -104,7 +104,7 @@ public final class CacheUtils {
      */
     public static CacheUtils getInstance(String cacheName, final long maxSize, final int maxCount) {
         if (isSpace(cacheName)) cacheName = "cacheUtils";
-        File file = new File(Utils.getApp().getCacheDir(), cacheName);
+        File file = new File(utilcode.util.Utils.getApp().getCacheDir(), cacheName);
         return getInstance(file, maxSize, maxCount);
     }
 
@@ -999,7 +999,7 @@ public final class CacheUtils {
         private static Drawable bitmap2Drawable(final Bitmap bitmap) {
             return bitmap == null
                     ? null
-                    : new BitmapDrawable(Utils.getApp().getResources(), bitmap);
+                    : new BitmapDrawable(utilcode.util.Utils.getApp().getResources(), bitmap);
         }
     }
 

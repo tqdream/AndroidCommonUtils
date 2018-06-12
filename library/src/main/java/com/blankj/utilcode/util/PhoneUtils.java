@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -36,7 +36,7 @@ public final class PhoneUtils {
      */
     public static boolean isPhone() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null && tm.getPhoneType() != TelephonyManager.PHONE_TYPE_NONE;
     }
 
@@ -51,7 +51,7 @@ public final class PhoneUtils {
     @RequiresPermission(READ_PHONE_STATE)
     public static String getDeviceId() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getDeviceId() : "";
     }
 
@@ -66,7 +66,7 @@ public final class PhoneUtils {
     @RequiresPermission(READ_PHONE_STATE)
     public static String getIMEI() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return tm != null ? tm.getImei() : "";
         }
@@ -84,7 +84,7 @@ public final class PhoneUtils {
     @RequiresPermission(READ_PHONE_STATE)
     public static String getMEID() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return tm != null ? tm.getMeid() : "";
         } else {
@@ -103,7 +103,7 @@ public final class PhoneUtils {
     @RequiresPermission(READ_PHONE_STATE)
     public static String getIMSI() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getSubscriberId() : "";
     }
 
@@ -120,7 +120,7 @@ public final class PhoneUtils {
      */
     public static int getPhoneType() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getPhoneType() : -1;
     }
 
@@ -131,7 +131,7 @@ public final class PhoneUtils {
      */
     public static boolean isSimCardReady() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null && tm.getSimState() == TelephonyManager.SIM_STATE_READY;
     }
 
@@ -142,7 +142,7 @@ public final class PhoneUtils {
      */
     public static String getSimOperatorName() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getSimOperatorName() : "";
     }
 
@@ -153,7 +153,7 @@ public final class PhoneUtils {
      */
     public static String getSimOperatorByMnc() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         String operator = tm != null ? tm.getSimOperator() : null;
         if (operator == null) return null;
         switch (operator) {
@@ -195,7 +195,7 @@ public final class PhoneUtils {
     @RequiresPermission(READ_PHONE_STATE)
     public static String getPhoneStatus() {
         TelephonyManager tm =
-                (TelephonyManager) Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                (TelephonyManager) utilcode.util.Utils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         if (tm == null) return "";
         String str = "";
         str += "DeviceId(IMEI) = " + tm.getDeviceId() + "\n";
@@ -222,7 +222,7 @@ public final class PhoneUtils {
      * @param phoneNumber The phone number.
      */
     public static void dial(final String phoneNumber) {
-        Utils.getApp().startActivity(IntentUtils.getDialIntent(phoneNumber, true));
+        utilcode.util.Utils.getApp().startActivity(IntentUtils.getDialIntent(phoneNumber, true));
     }
 
     /**
@@ -233,7 +233,7 @@ public final class PhoneUtils {
      */
     @RequiresPermission(CALL_PHONE)
     public static void call(final String phoneNumber) {
-        Utils.getApp().startActivity(IntentUtils.getCallIntent(phoneNumber, true));
+        utilcode.util.Utils.getApp().startActivity(IntentUtils.getCallIntent(phoneNumber, true));
     }
 
     /**
@@ -243,7 +243,7 @@ public final class PhoneUtils {
      * @param content     The content.
      */
     public static void sendSms(final String phoneNumber, final String content) {
-        Utils.getApp().startActivity(IntentUtils.getSendSmsIntent(phoneNumber, content, true));
+        utilcode.util.Utils.getApp().startActivity(IntentUtils.getSendSmsIntent(phoneNumber, content, true));
     }
 
     /**
@@ -256,7 +256,7 @@ public final class PhoneUtils {
     @RequiresPermission(SEND_SMS)
     public static void sendSmsSilent(final String phoneNumber, final String content) {
         if (StringUtils.isEmpty(content)) return;
-        PendingIntent sentIntent = PendingIntent.getBroadcast(Utils.getApp(), 0, new Intent("send"), 0);
+        PendingIntent sentIntent = PendingIntent.getBroadcast(utilcode.util.Utils.getApp(), 0, new Intent("send"), 0);
         SmsManager smsManager = SmsManager.getDefault();
         if (content.length() >= 70) {
             List<String> ms = smsManager.divideMessage(content);

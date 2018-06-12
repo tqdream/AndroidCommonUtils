@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.net.Uri;
 import android.os.Build;
@@ -29,8 +29,8 @@ public final class UriUtils {
     public static Uri getUriForFile(final File file) {
         if (file == null) return null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            String authority = Utils.getApp().getPackageName() + ".com.blankj.utilcode.provider";
-            return FileProvider.getUriForFile(Utils.getApp(), authority, file);
+            String authority = utilcode.util.Utils.getApp().getPackageName() + ".com.blankj.utilcode.provider";
+            return FileProvider.getUriForFile(utilcode.util.Utils.getApp(), authority, file);
         } else {
             return Uri.fromFile(file);
         }

@@ -1,4 +1,4 @@
-package tqdream.dialog;
+package tqdream.ok.good.dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;

@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -82,8 +82,8 @@ public final class IntentUtils {
             data = Uri.fromFile(file);
         } else {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            String authority = Utils.getApp().getPackageName() + ".com.blankj.utilcode.provider";
-            data = FileProvider.getUriForFile(Utils.getApp(), authority, file);
+            String authority = utilcode.util.Utils.getApp().getPackageName() + ".com.blankj.utilcode.provider";
+            data = FileProvider.getUriForFile(utilcode.util.Utils.getApp(), authority, file);
         }
         intent.setDataAndType(data, type);
         return getIntent(intent, isNewTask);
@@ -160,7 +160,7 @@ public final class IntentUtils {
             data = Uri.fromFile(file);
         } else {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            data = FileProvider.getUriForFile(Utils.getApp(), authority, file);
+            data = FileProvider.getUriForFile(utilcode.util.Utils.getApp(), authority, file);
         }
         intent.setDataAndType(data, type);
         return getIntent(intent, isNewTask);
@@ -207,7 +207,7 @@ public final class IntentUtils {
      * @return the intent of launch app
      */
     public static Intent getLaunchAppIntent(final String packageName, final boolean isNewTask) {
-        Intent intent = Utils.getApp().getPackageManager().getLaunchIntentForPackage(packageName);
+        Intent intent = utilcode.util.Utils.getApp().getPackageManager().getLaunchIntentForPackage(packageName);
         if (intent == null) return null;
         return getIntent(intent, isNewTask);
     }

@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;

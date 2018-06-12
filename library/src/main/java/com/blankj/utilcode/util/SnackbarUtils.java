@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;

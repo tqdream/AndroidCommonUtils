@@ -1,4 +1,4 @@
-package utilcode.util;
+package com.blankj.utilcode.util;
 
 import android.content.Context;
 import android.os.Environment;
@@ -64,7 +64,7 @@ public final class SDCardUtils {
     public static List<String> getSDCardPaths(final boolean removable) {
         List<String> paths = new ArrayList<>();
         StorageManager sm =
-                (StorageManager) Utils.getApp().getSystemService(Context.STORAGE_SERVICE);
+                (StorageManager) utilcode.util.Utils.getApp().getSystemService(Context.STORAGE_SERVICE);
         try {
             Class<?> storageVolumeClazz = Class.forName("android.os.storage.StorageVolume");
             Method getVolumeList = StorageManager.class.getMethod("getVolumeList");
@@ -98,7 +98,7 @@ public final class SDCardUtils {
      * @return the paths of sdcard
      */
     public static List<String> getSDCardPaths() {
-        StorageManager storageManager = (StorageManager) Utils.getApp()
+        StorageManager storageManager = (StorageManager) utilcode.util.Utils.getApp()
                 .getSystemService(Context.STORAGE_SERVICE);
         List<String> paths = new ArrayList<>();
         try {
