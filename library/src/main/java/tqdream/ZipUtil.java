@@ -1,36 +1,39 @@
 package tqdream;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-/**
- * @Description:主要功能: 实现的Zip工具
- * @Prject: CommonUtilLibrary
- * @Package: com.jingewenku.abrahamcaijin.commonutil
- * @author: AbrahamCaiJin
- * @date: 2017年05月24日 18:21
- * @Copyright: 个人版权所有
- * @Company:
- * @version: 1.0.0
- */
 
+/**
+ * Java utils 实现的Zip工具
+ *
+ * @author once
+ */
 public class ZipUtil{
     private static final int BUFF_SIZE = 1024 * 1024; // 1M Byte
     private static boolean stopZipFlag;
 
     public static boolean isStopZipFlag() {
-        return stopZipFlag;
-    }
+		return stopZipFlag;
+	}
 
-    public static void setStopZipFlag(boolean stopZipFlag) {
-        ZipUtil.stopZipFlag = stopZipFlag;
-    }
+	public static void setStopZipFlag(boolean stopZipFlag) {
+		ZipUtil.stopZipFlag = stopZipFlag;
+	}
 
-    /**
+	/**
      * 批量压缩文件（夹）
      *
      * @param resFileList 要压缩的文件（夹）列表
@@ -42,7 +45,7 @@ public class ZipUtil{
         ZipOutputStream zipout = null;
         try {
             zipout = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(
-                zipFile), BUFF_SIZE));
+                    zipFile), BUFF_SIZE));
             for (File resFile : resFileList) {
                 if(stopZipFlag){
                     break;
@@ -64,18 +67,18 @@ public class ZipUtil{
      * @param zipListener    zipListener
      */
     public static void zipFiles(Collection<File> resFileList, File zipFile, String comment,ZipListener zipListener)
-    {
-        ZipOutputStream zipout = null;
-        try {
-            zipout = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFile), BUFF_SIZE));
-            for (File resFile : resFileList) {
-                zipFile(resFile, zipout, "",zipListener);
-            }
-            zipout.setComment(comment);
-            zipout.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+           {
+               ZipOutputStream zipout = null;
+               try {
+                   zipout = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFile), BUFF_SIZE));
+                   for (File resFile : resFileList) {
+                       zipFile(resFile, zipout, "",zipListener);
+                   }
+                   zipout.setComment(comment);
+                   zipout.close();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
     }
 
     /**
@@ -129,7 +132,7 @@ public class ZipUtil{
      * @return   返回的集合
      */
     public static ArrayList<File> upZipSelectedFile(File zipFile, String folderPath,
-        String nameContains) {
+            String nameContains) {
 
         ArrayList<File> fileList = new ArrayList<File>();
 
@@ -172,7 +175,7 @@ public class ZipUtil{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+            return null;
     }
 
     /**
@@ -195,7 +198,7 @@ public class ZipUtil{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+            return null;
     }
 
     /**
@@ -253,10 +256,10 @@ public class ZipUtil{
      * @param rootpath 压缩的文件路径
      */
     private static void zipFile(File resFile, ZipOutputStream zipout, String rootpath,ZipListener zipListener)
-    {
+          {
         try {
             rootpath = rootpath + (rootpath.trim().length() == 0 ? "" : File.separator)
-                + resFile.getName();
+                    + resFile.getName();
             rootpath = new String(rootpath.getBytes("8859_1"), "GB2312");
             if (resFile.isDirectory()) {
                 File[] fileList = resFile.listFiles();
@@ -275,7 +278,7 @@ public class ZipUtil{
             } else {
                 byte buffer[] = new byte[BUFF_SIZE];
                 BufferedInputStream in = new BufferedInputStream(new FileInputStream(resFile),
-                    BUFF_SIZE);
+                        BUFF_SIZE);
                 zipout.putNextEntry(new ZipEntry(rootpath));
                 int realLength;
                 while ((realLength = in.read(buffer)) != -1) {
@@ -294,6 +297,6 @@ public class ZipUtil{
 
     }
     public interface ZipListener{
-        void zipProgress(int zipProgress);
+    	void zipProgress(int zipProgress);
     }
 }

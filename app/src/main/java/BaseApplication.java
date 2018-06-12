@@ -5,6 +5,9 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
+import tqdream.utils.crash.BaseCrashHandler;
+import tqdream.utils.crash.RebootThreadExceptionHandler;
+
 /**
  * 捕获应用异常Application
  * 在这里完成整个应用退出；在这里进行全局变量的传递；在这里完成低内存的释放；在这里捕获未抓住的异常；用于应用配置, 预加载处理

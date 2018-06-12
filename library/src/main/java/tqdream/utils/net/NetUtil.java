@@ -31,7 +31,7 @@ import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import tqdream.myutil.LogUtils;
+import tqdream.log.log.LogUtils2;
 import tqdream.utils.ShellUtils;
 
 //跟网络相关的工具类
@@ -865,10 +865,10 @@ public class NetUtil {
         ShellUtils.CommandResult result = ShellUtils.execCommand("ping -c 1 -w 1 123.125.114.144", false);
         boolean ret = result.result == 0;
         if (result.errorMsg != null) {
-            LogUtils.d("isAvailableByPing", result.errorMsg);
+            LogUtils2.d("isAvailableByPing", result.errorMsg);
         }
         if (result.successMsg != null) {
-            LogUtils.d("isAvailableByPing", result.successMsg);
+            LogUtils2.d("isAvailableByPing", result.successMsg);
         }
         return ret;
     }
@@ -1108,7 +1108,7 @@ public class NetUtil {
         if (mode == 1)
             return false;
         String operator = manager.getSimOperator();
-        String imsi = SIMUtils.getInstance(context).getIMSI();
+        String imsi = tqdream.base.base.utils.net.SIMUtils.getInstance(context).getIMSI();
         // 当操作码与当前IMSI不一致的时候以IMSI为准
         if (!TextUtils.isEmpty(imsi)) {
             if (!imsi.startsWith(operator)) {
