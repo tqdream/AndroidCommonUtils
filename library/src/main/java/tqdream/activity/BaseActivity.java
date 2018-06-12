@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidcommonutil.tqdreamlibrary.R;
-import tqdream.ok.widget.TitleBar;
+import tqdream.ok.good.widget.TitleBar;
 
 public class BaseActivity extends AppCompatActivity {
 

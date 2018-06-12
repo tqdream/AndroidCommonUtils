@@ -149,7 +149,7 @@ public class LogReader extends Thread {
                 + android.os.Build.VERSION.CODENAME);
         android.util.Log.w("system", "android.os.Build.VERSION.RELEASE:"
                 + android.os.Build.VERSION.RELEASE);
-        //android.util.Log.w("system", "android.os.Build.VERSION.SDK:"
+        //android.com.blankj.subutil.util.Log.w("system", "android.os.Build.VERSION.SDK:"
         //        + android.os.Build.VERSION.SDK);
     }
 }

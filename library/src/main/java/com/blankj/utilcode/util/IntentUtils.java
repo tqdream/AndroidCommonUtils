@@ -1,4 +1,4 @@
-package com.blankj.utilcode.util;
+package utilcode.util;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -6,16 +6,19 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresPermission;
 import android.support.v4.content.FileProvider;
 
 import java.io.File;
+
+import static android.Manifest.permission.CALL_PHONE;
 
 /**
  * <pre>
  *     author: Blankj
  *     blog  : http://blankj.com
  *     time  : 2016/09/23
- *     desc  : 意图相关工具类
+ *     desc  : utils about intent
  * </pre>
  */
 public final class IntentUtils {
@@ -25,28 +28,130 @@ public final class IntentUtils {
     }
 
     /**
-     * 获取安装 App（支持 8.0）的意图
-     * <p>8.0 需添加权限 {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
+     * Return the intent of install app.
+     * <p>Target APIs greater than 25 must hold
+     * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
      *
-     * @param filePath  文件路径
-     * @param authority 7.0 及以上安装需要传入清单文件中的{@code <provider>}的 authorities 属性
-     *                  <br>参看 https://developer.android.com/reference/android/support/v4/content/FileProvider.html
-     * @return intent
+     * @param filePath The path of file.
+     * @return the intent of install app
      */
-    public static Intent getInstallAppIntent(final String filePath, final String authority) {
-        return getInstallAppIntent(FileUtils.getFileByPath(filePath), authority);
+    public static Intent getInstallAppIntent(final String filePath) {
+        return getInstallAppIntent(getFileByPath(filePath), false);
     }
 
     /**
-     * 获取安装 App(支持 8.0)的意图
-     * <p>8.0 需添加权限 {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
+     * Return the intent of install app.
+     * <p>Target APIs greater than 25 must hold
+     * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
      *
-     * @param file      文件
-     * @param authority 7.0 及以上安装需要传入清单文件中的{@code <provider>}的 authorities 属性
-     *                  <br>参看 https://developer.android.com/reference/android/support/v4/content/FileProvider.html
-     * @return intent
+     * @param file The file.
+     * @return the intent of install app
      */
+    public static Intent getInstallAppIntent(final File file) {
+        return getInstallAppIntent(file, false);
+    }
+
+    /**
+     * Return the intent of install app.
+     * <p>Target APIs greater than 25 must hold
+     * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
+     *
+     * @param filePath  The path of file.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of install app
+     */
+    public static Intent getInstallAppIntent(final String filePath, final boolean isNewTask) {
+        return getInstallAppIntent(getFileByPath(filePath), isNewTask);
+    }
+
+    /**
+     * Return the intent of install app.
+     * <p>Target APIs greater than 25 must hold
+     * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
+     *
+     * @param file      The file.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of install app
+     */
+    public static Intent getInstallAppIntent(final File file, final boolean isNewTask) {
+        if (file == null) return null;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri data;
+        String type = "application/vnd.android.package-archive";
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            data = Uri.fromFile(file);
+        } else {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            String authority = Utils.getApp().getPackageName() + ".com.blankj.utilcode.provider";
+            data = FileProvider.getUriForFile(Utils.getApp(), authority, file);
+        }
+        intent.setDataAndType(data, type);
+        return getIntent(intent, isNewTask);
+    }
+
+    /**
+     * Return the intent of install app.
+     * <p>Target APIs greater than 25 must hold
+     * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
+     *
+     * @param filePath  The path of file.
+     * @param authority Target APIs greater than 23 must hold the authority of a FileProvider
+     *                  defined in a {@code <provider>} element in your app's manifest.
+     * @return the intent of install app
+     */
+    @Deprecated
+    public static Intent getInstallAppIntent(final String filePath, final String authority) {
+        return getInstallAppIntent(getFileByPath(filePath), authority, false);
+    }
+
+    /**
+     * Return the intent of install app.
+     * <p>Target APIs greater than 25 must hold
+     * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
+     *
+     * @param file      The file.
+     * @param authority Target APIs greater than 23 must hold the authority of a FileProvider
+     *                  defined in a {@code <provider>} element in your app's manifest.
+     * @return the intent of install app
+     */
+    @Deprecated
     public static Intent getInstallAppIntent(final File file, final String authority) {
+        return getInstallAppIntent(file, authority, false);
+    }
+
+    /**
+     * Return the intent of install app.
+     * <p>Target APIs greater than 25 must hold
+     * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
+     *
+     * @param filePath  The path of file.
+     * @param authority Target APIs greater than 23 must hold the authority of a FileProvider
+     *                  defined in a {@code <provider>} element in your app's manifest.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of install app
+     */
+    @Deprecated
+    public static Intent getInstallAppIntent(final String filePath,
+                                             final String authority,
+                                             final boolean isNewTask) {
+        return getInstallAppIntent(getFileByPath(filePath), authority, isNewTask);
+    }
+
+    /**
+     * Return the intent of install app.
+     * <p>Target APIs greater than 25 must hold
+     * {@code <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />}</p>
+     *
+     * @param file      The file.
+     * @param authority Target APIs greater than 23 must hold the authority of a FileProvider
+     *                  defined in a {@code <provider>} element in your app's manifest.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of install app
+     */
+    @Deprecated
+    public static Intent getInstallAppIntent(final File file,
+                                             final String authority,
+                                             final boolean isNewTask) {
         if (file == null) return null;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         Uri data;
@@ -58,177 +163,389 @@ public final class IntentUtils {
             data = FileProvider.getUriForFile(Utils.getApp(), authority, file);
         }
         intent.setDataAndType(data, type);
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
     }
 
     /**
-     * 获取卸载 App 的意图
+     * Return the intent of uninstall app.
      *
-     * @param packageName 包名
-     * @return intent
+     * @param packageName The name of the package.
+     * @return the intent of uninstall app
      */
     public static Intent getUninstallAppIntent(final String packageName) {
+        return getUninstallAppIntent(packageName, false);
+    }
+
+    /**
+     * Return the intent of uninstall app.
+     *
+     * @param packageName The name of the package.
+     * @param isNewTask   True to add flag of new task, false otherwise.
+     * @return the intent of uninstall app
+     */
+    public static Intent getUninstallAppIntent(final String packageName, final boolean isNewTask) {
         Intent intent = new Intent(Intent.ACTION_DELETE);
         intent.setData(Uri.parse("package:" + packageName));
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
     }
 
     /**
-     * 获取打开 App 的意图
+     * Return the intent of launch app.
      *
-     * @param packageName 包名
-     * @return intent
+     * @param packageName The name of the package.
+     * @return the intent of launch app
      */
     public static Intent getLaunchAppIntent(final String packageName) {
-        return Utils.getApp().getPackageManager().getLaunchIntentForPackage(packageName);
+        return getLaunchAppIntent(packageName, false);
     }
 
     /**
-     * 获取 App 具体设置的意图
+     * Return the intent of launch app.
      *
-     * @param packageName 包名
-     * @return intent
+     * @param packageName The name of the package.
+     * @param isNewTask   True to add flag of new task, false otherwise.
+     * @return the intent of launch app
      */
-    public static Intent getAppDetailsSettingsIntent(final String packageName) {
+    public static Intent getLaunchAppIntent(final String packageName, final boolean isNewTask) {
+        Intent intent = Utils.getApp().getPackageManager().getLaunchIntentForPackage(packageName);
+        if (intent == null) return null;
+        return getIntent(intent, isNewTask);
+    }
+
+    /**
+     * Return the intent of launch app details settings.
+     *
+     * @param packageName The name of the package.
+     * @return the intent of launch app details settings
+     */
+    public static Intent getLaunchAppDetailsSettingsIntent(final String packageName) {
+        return getLaunchAppDetailsSettingsIntent(packageName, false);
+    }
+
+    /**
+     * Return the intent of launch app details settings.
+     *
+     * @param packageName The name of the package.
+     * @param isNewTask   True to add flag of new task, false otherwise.
+     * @return the intent of launch app details settings
+     */
+    public static Intent getLaunchAppDetailsSettingsIntent(final String packageName,
+                                                           final boolean isNewTask) {
         Intent intent = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
         intent.setData(Uri.parse("package:" + packageName));
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
     }
 
     /**
-     * 获取分享文本的意图
+     * Return the intent of share text.
      *
-     * @param content 分享文本
-     * @return intent
+     * @param content The content.
+     * @return the intent of share text
      */
     public static Intent getShareTextIntent(final String content) {
+        return getShareTextIntent(content, false);
+    }
+
+    /**
+     * Return the intent of share text.
+     *
+     * @param content   The content.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of share text
+     */
+
+    public static Intent getShareTextIntent(final String content, final boolean isNewTask) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, content);
-        return intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
     }
 
     /**
-     * 获取分享图片的意图
+     * Return the intent of share image.
      *
-     * @param content   文本
-     * @param imagePath 图片文件路径
-     * @return intent
+     * @param content   The content.
+     * @param imagePath The path of image.
+     * @return the intent of share image
      */
     public static Intent getShareImageIntent(final String content, final String imagePath) {
-        return getShareImageIntent(content, FileUtils.getFileByPath(imagePath));
+        return getShareImageIntent(content, imagePath, false);
     }
 
     /**
-     * 获取分享图片的意图
+     * Return the intent of share image.
      *
-     * @param content 文本
-     * @param image   图片文件
-     * @return intent
+     * @param content   The content.
+     * @param imagePath The path of image.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of share image
+     */
+    public static Intent getShareImageIntent(final String content,
+                                             final String imagePath,
+                                             final boolean isNewTask) {
+        if (imagePath == null || imagePath.length() == 0) return null;
+        return getShareImageIntent(content, new File(imagePath), isNewTask);
+    }
+
+    /**
+     * Return the intent of share image.
+     *
+     * @param content The content.
+     * @param image   The file of image.
+     * @return the intent of share image
      */
     public static Intent getShareImageIntent(final String content, final File image) {
-        if (!FileUtils.isFileExists(image)) return null;
-        return getShareImageIntent(content, Uri.fromFile(image));
+        return getShareImageIntent(content, image, false);
     }
 
     /**
-     * 获取分享图片的意图
+     * Return the intent of share image.
      *
-     * @param content 分享文本
-     * @param uri     图片 uri
-     * @return intent
+     * @param content   The content.
+     * @param image     The file of image.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of share image
+     */
+    public static Intent getShareImageIntent(final String content,
+                                             final File image,
+                                             final boolean isNewTask) {
+        if (image != null && image.isFile()) return null;
+        return getShareImageIntent(content, Uri.fromFile(image), isNewTask);
+    }
+
+    /**
+     * Return the intent of share image.
+     *
+     * @param content The content.
+     * @param uri     The uri of image.
+     * @return the intent of share image
      */
     public static Intent getShareImageIntent(final String content, final Uri uri) {
+        return getShareImageIntent(content, uri, false);
+    }
+
+    /**
+     * Return the intent of share image.
+     *
+     * @param content   The content.
+     * @param uri       The uri of image.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of share image
+     */
+    public static Intent getShareImageIntent(final String content,
+                                             final Uri uri,
+                                             final boolean isNewTask) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, content);
         intent.putExtra(Intent.EXTRA_STREAM, uri);
         intent.setType("image/*");
-        return intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
     }
 
     /**
-     * 获取其他应用组件的意图
+     * Return the intent of component.
      *
-     * @param packageName 包名
-     * @param className   全类名
-     * @return intent
+     * @param packageName The name of the package.
+     * @param className   The name of class.
+     * @return the intent of component
      */
     public static Intent getComponentIntent(final String packageName, final String className) {
-        return getComponentIntent(packageName, className, null);
+        return getComponentIntent(packageName, className, null, false);
     }
 
     /**
-     * 获取其他应用组件的意图
+     * Return the intent of component.
      *
-     * @param packageName 包名
-     * @param className   全类名
-     * @param bundle      bundle
-     * @return intent
+     * @param packageName The name of the package.
+     * @param className   The name of class.
+     * @param isNewTask   True to add flag of new task, false otherwise.
+     * @return the intent of component
      */
-    public static Intent getComponentIntent(final String packageName, final String className, final Bundle bundle) {
+    public static Intent getComponentIntent(final String packageName,
+                                            final String className,
+                                            final boolean isNewTask) {
+        return getComponentIntent(packageName, className, null, isNewTask);
+    }
+
+    /**
+     * Return the intent of component.
+     *
+     * @param packageName The name of the package.
+     * @param className   The name of class.
+     * @param bundle      The Bundle of extras to add to this intent.
+     * @return the intent of component
+     */
+    public static Intent getComponentIntent(final String packageName,
+                                            final String className,
+                                            final Bundle bundle) {
+        return getComponentIntent(packageName, className, bundle, false);
+    }
+
+    /**
+     * Return the intent of component.
+     *
+     * @param packageName The name of the package.
+     * @param className   The name of class.
+     * @param bundle      The Bundle of extras to add to this intent.
+     * @param isNewTask   True to add flag of new task, false otherwise.
+     * @return the intent of component
+     */
+    public static Intent getComponentIntent(final String packageName,
+                                            final String className,
+                                            final Bundle bundle,
+                                            final boolean isNewTask) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (bundle != null) intent.putExtras(bundle);
         ComponentName cn = new ComponentName(packageName, className);
         intent.setComponent(cn);
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
     }
 
     /**
-     * 获取关机的意图
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.SHUTDOWN"/>}</p>
+     * Return the intent of shutdown.
+     * <p>Requires root permission
+     * or hold {@code android:sharedUserId="android.uid.system"},
+     * {@code <uses-permission android:name="android.permission.SHUTDOWN/>}
+     * in manifest.</p>
      *
-     * @return intent
+     * @return the intent of shutdown
      */
     public static Intent getShutdownIntent() {
-        Intent intent = new Intent(Intent.ACTION_SHUTDOWN);
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getShutdownIntent(false);
     }
 
     /**
-     * 获取跳至拨号界面意图
+     * Return the intent of shutdown.
+     * <p>Requires root permission
+     * or hold {@code android:sharedUserId="android.uid.system"},
+     * {@code <uses-permission android:name="android.permission.SHUTDOWN/>}
+     * in manifest.</p>
      *
-     * @param phoneNumber 电话号码
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of shutdown
+     */
+    public static Intent getShutdownIntent(final boolean isNewTask) {
+        Intent intent = new Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN");
+        intent.putExtra("android.intent.extra.KEY_CONFIRM", false);
+        return getIntent(intent, isNewTask);
+    }
+
+    /**
+     * Return the intent of dial.
+     *
+     * @param phoneNumber The phone number.
+     * @return the intent of dial
      */
     public static Intent getDialIntent(final String phoneNumber) {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getDialIntent(phoneNumber, false);
     }
 
     /**
-     * 获取拨打电话意图
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.CALL_PHONE"/>}</p>
+     * Return the intent of dial.
      *
-     * @param phoneNumber 电话号码
+     * @param phoneNumber The phone number.
+     * @param isNewTask   True to add flag of new task, false otherwise.
+     * @return the intent of dial
      */
-    public static Intent getCallIntent(final String phoneNumber) {
-        Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + phoneNumber));
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    public static Intent getDialIntent(final String phoneNumber, final boolean isNewTask) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
+        return getIntent(intent, isNewTask);
     }
 
     /**
-     * 获取跳至发送短信界面的意图
+     * Return the intent of call.
+     * <p>Must hold {@code <uses-permission android:name="android.permission.CALL_PHONE" />}</p>
      *
-     * @param phoneNumber 接收号码
-     * @param content     短信内容
+     * @param phoneNumber The phone number.
+     * @return the intent of call
+     */
+    @RequiresPermission(CALL_PHONE)
+    public static Intent getCallIntent(final String phoneNumber) {
+        return getCallIntent(phoneNumber, false);
+    }
+
+    /**
+     * Return the intent of call.
+     * <p>Must hold {@code <uses-permission android:name="android.permission.CALL_PHONE" />}</p>
+     *
+     * @param phoneNumber The phone number.
+     * @param isNewTask   True to add flag of new task, false otherwise.
+     * @return the intent of call
+     */
+    @RequiresPermission(CALL_PHONE)
+    public static Intent getCallIntent(final String phoneNumber, final boolean isNewTask) {
+        Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + phoneNumber));
+        return getIntent(intent, isNewTask);
+    }
+
+    /**
+     * Return the intent of send SMS.
+     *
+     * @param phoneNumber The phone number.
+     * @param content     The content of SMS.
+     * @return the intent of send SMS
      */
     public static Intent getSendSmsIntent(final String phoneNumber, final String content) {
+        return getSendSmsIntent(phoneNumber, content, false);
+    }
+
+    /**
+     * Return the intent of send SMS.
+     *
+     * @param phoneNumber The phone number.
+     * @param content     The content of SMS.
+     * @param isNewTask   True to add flag of new task, false otherwise.
+     * @return the intent of send SMS
+     */
+    public static Intent getSendSmsIntent(final String phoneNumber,
+                                          final String content,
+                                          final boolean isNewTask) {
         Uri uri = Uri.parse("smsto:" + phoneNumber);
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
         intent.putExtra("sms_body", content);
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return getIntent(intent, isNewTask);
     }
 
-
     /**
-     * 获取拍照的意图
+     * Return the intent of capture.
      *
-     * @param outUri 输出的 uri
-     * @return 拍照的意图
+     * @param outUri The uri of output.
+     * @return the intent of capture
      */
     public static Intent getCaptureIntent(final Uri outUri) {
+        return getCaptureIntent(outUri, false);
+    }
+
+    /**
+     * Return the intent of capture.
+     *
+     * @param outUri    The uri of output.
+     * @param isNewTask True to add flag of new task, false otherwise.
+     * @return the intent of capture
+     */
+    public static Intent getCaptureIntent(final Uri outUri, final boolean isNewTask) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, outUri);
-        return intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        return getIntent(intent, isNewTask);
+    }
+
+    private static Intent getIntent(final Intent intent, final boolean isNewTask) {
+        return isNewTask ? intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) : intent;
+    }
+
+    private static File getFileByPath(final String filePath) {
+        return isSpace(filePath) ? null : new File(filePath);
+    }
+
+    private static boolean isSpace(final String s) {
+        if (s == null) return true;
+        for (int i = 0, len = s.length(); i < len; ++i) {
+            if (!Character.isWhitespace(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
 //    /**

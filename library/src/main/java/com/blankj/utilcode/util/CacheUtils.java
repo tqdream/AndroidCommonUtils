@@ -1,4 +1,4 @@
-package com.blankj.utilcode.util;
+package utilcode.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,7 +40,7 @@ import java.util.concurrent.atomic.AtomicLong;
  *     author: Blankj
  *     blog  : http://blankj.com
  *     time  : 2017/05/24
- *     desc  : 缓存相关工具类
+ *     desc  : utils about cache
  * </pre>
  */
 public final class CacheUtils {
@@ -57,50 +57,50 @@ public final class CacheUtils {
     private CacheManager mCacheManager;
 
     /**
-     * 获取缓存实例
-     * <p>在 /data/data/com.xxx.xxx/cache/cacheUtils 目录</p>
-     * <p>缓存尺寸不限</p>
-     * <p>缓存个数不限</p>
+     * Return the single {@link CacheUtils} instance.
+     * <p>cache directory: /data/data/package/cache/cacheUtils</p>
+     * <p>cache size: unlimited</p>
+     * <p>cache count: unlimited</p>
      *
-     * @return {@link CacheUtils}
+     * @return the single {@link CacheUtils} instance
      */
     public static CacheUtils getInstance() {
         return getInstance("", DEFAULT_MAX_SIZE, DEFAULT_MAX_COUNT);
     }
 
     /**
-     * 获取缓存实例
-     * <p>在 /data/data/com.xxx.xxx/cache/cacheName 目录</p>
-     * <p>缓存尺寸不限</p>
-     * <p>缓存个数不限</p>
+     * Return the single {@link CacheUtils} instance.
+     * <p>cache directory: /data/data/package/cache/cacheUtils</p>
+     * <p>cache size: unlimited</p>
+     * <p>cache count: unlimited</p>
      *
-     * @param cacheName 缓存目录名
-     * @return {@link CacheUtils}
+     * @param cacheName The name of cache.
+     * @return the single {@link CacheUtils} instance
      */
     public static CacheUtils getInstance(final String cacheName) {
         return getInstance(cacheName, DEFAULT_MAX_SIZE, DEFAULT_MAX_COUNT);
     }
 
     /**
-     * 获取缓存实例
-     * <p>在 /data/data/com.xxx.xxx/cache/cacheUtils目录 </p>
+     * Return the single {@link CacheUtils} instance.
+     * <p>cache directory: /data/data/package/cache/cacheUtils</p>
      *
-     * @param maxSize  最大缓存尺寸，单位字节
-     * @param maxCount 最大缓存个数
-     * @return {@link CacheUtils}
+     * @param maxSize  The max size of cache, in bytes.
+     * @param maxCount The max count of cache.
+     * @return the single {@link CacheUtils} instance
      */
     public static CacheUtils getInstance(final long maxSize, final int maxCount) {
         return getInstance("", maxSize, maxCount);
     }
 
     /**
-     * 获取缓存实例
-     * <p>在 /data/data/com.xxx.xxx/cache/cacheName 目录</p>
+     * Return the single {@link CacheUtils} instance.
+     * <p>cache directory: /data/data/package/cache/cacheName</p>
      *
-     * @param cacheName 缓存目录名
-     * @param maxSize   最大缓存尺寸，单位字节
-     * @param maxCount  最大缓存个数
-     * @return {@link CacheUtils}
+     * @param cacheName The name of cache.
+     * @param maxSize   The max size of cache, in bytes.
+     * @param maxCount  The max count of cache.
+     * @return the single {@link CacheUtils} instance
      */
     public static CacheUtils getInstance(String cacheName, final long maxSize, final int maxCount) {
         if (isSpace(cacheName)) cacheName = "cacheUtils";
@@ -109,28 +109,28 @@ public final class CacheUtils {
     }
 
     /**
-     * 获取缓存实例
-     * <p>在 cacheDir 目录</p>
-     * <p>缓存尺寸不限</p>
-     * <p>缓存个数不限</p>
+     * Return the single {@link CacheUtils} instance.
+     * <p>cache size: unlimited</p>
+     * <p>cache count: unlimited</p>
      *
-     * @param cacheDir 缓存目录
-     * @return {@link CacheUtils}
+     * @param cacheDir The directory of cache.
+     * @return the single {@link CacheUtils} instance
      */
     public static CacheUtils getInstance(@NonNull final File cacheDir) {
         return getInstance(cacheDir, DEFAULT_MAX_SIZE, DEFAULT_MAX_COUNT);
     }
 
     /**
-     * 获取缓存实例
-     * <p>在 cacheDir 目录</p>
+     * Return the single {@link CacheUtils} instance.
      *
-     * @param cacheDir 缓存目录
-     * @param maxSize  最大缓存尺寸，单位字节
-     * @param maxCount 最大缓存个数
-     * @return {@link CacheUtils}
+     * @param cacheDir The directory of cache.
+     * @param maxSize  The max size of cache, in bytes.
+     * @param maxCount The max count of cache.
+     * @return the single {@link CacheUtils} instance
      */
-    public static CacheUtils getInstance(@NonNull final File cacheDir, final long maxSize, final int maxCount) {
+    public static CacheUtils getInstance(@NonNull final File cacheDir,
+                                         final long maxSize,
+                                         final int maxCount) {
         final String cacheKey = cacheDir.getAbsoluteFile() + "_" + Process.myPid();
         CacheUtils cache = CACHE_MAP.get(cacheKey);
         if (cache == null) {
@@ -148,52 +148,51 @@ public final class CacheUtils {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // bytes 读写
+    // bytes io
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * 缓存中写入字节数组
+     * Put bytes in cache.
      *
-     * @param key   键
-     * @param value 值
+     * @param key   The key of cache.
+     * @param value The value of cache.
      */
-    public void put(@NonNull final String key, @NonNull final byte[] value) {
+    public void put(@NonNull final String key, final byte[] value) {
         put(key, value, -1);
     }
 
     /**
-     * 缓存中写入字节数组
+     * Put bytes in cache.
      *
-     * @param key      键
-     * @param value    值
-     * @param saveTime 保存时长，单位：秒
+     * @param key      The key of cache.
+     * @param value    The value of cache.
+     * @param saveTime The save time of cache, in seconds.
      */
-    public void put(@NonNull final String key, @NonNull byte[] value, final int saveTime) {
-        if (value.length <= 0) return;
+    public void put(@NonNull final String key, byte[] value, final int saveTime) {
+        if (value == null || value.length <= 0) return;
         if (saveTime >= 0) value = CacheHelper.newByteArrayWithTime(saveTime, value);
         File file = mCacheManager.getFileBeforePut(key);
         CacheHelper.writeFileFromBytes(file, value);
         mCacheManager.updateModify(file);
         mCacheManager.put(file);
-
     }
 
     /**
-     * 缓存中读取字节数组
+     * Return the bytes in cache.
      *
-     * @param key 键
-     * @return 存在且没过期返回对应值，否则返回{@code null}
+     * @param key The key of cache.
+     * @return the bytes if cache exists or null otherwise
      */
     public byte[] getBytes(@NonNull final String key) {
         return getBytes(key, null);
     }
 
     /**
-     * 缓存中读取字节数组
+     * Return the bytes in cache.
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在且没过期返回对应值，否则返回默认值{@code defaultValue}
+     * @param key          The key of cache.
+     * @param defaultValue The default value if the cache doesn't exist.
+     * @return the bytes if cache exists or defaultValue otherwise
      */
     public byte[] getBytes(@NonNull final String key, final byte[] defaultValue) {
         final File file = mCacheManager.getFileIfExists(key);
@@ -208,46 +207,46 @@ public final class CacheUtils {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // String 读写
+    // String io
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * 缓存中写入 String
+     * Put string value in cache.
      *
-     * @param key   键
-     * @param value 值
+     * @param key   The key of cache.
+     * @param value The value of cache.
      */
-    public void put(@NonNull final String key, @NonNull final String value) {
+    public void put(@NonNull final String key, final String value) {
         put(key, value, -1);
     }
 
     /**
-     * 缓存中写入 String
+     * Put string value in cache.
      *
-     * @param key      键
-     * @param value    值
-     * @param saveTime 保存时长，单位：秒
+     * @param key      The key of cache.
+     * @param value    The value of cache.
+     * @param saveTime The save time of cache, in seconds.
      */
-    public void put(@NonNull final String key, @NonNull final String value, final int saveTime) {
+    public void put(@NonNull final String key, final String value, final int saveTime) {
         put(key, CacheHelper.string2Bytes(value), saveTime);
     }
 
     /**
-     * 缓存中读取 String
+     * Return the string value in cache.
      *
-     * @param key 键
-     * @return 存在且没过期返回对应值，否则返回{@code null}
+     * @param key The key of cache.
+     * @return the string value if cache exists or null otherwise
      */
     public String getString(@NonNull final String key) {
         return getString(key, null);
     }
 
     /**
-     * 缓存中读取 String
+     * Return the string value in cache.
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在且没过期返回对应值，否则返回默认值{@code defaultValue}
+     * @param key          The key of cache.
+     * @param defaultValue The default value if the cache doesn't exist.
+     * @return the string value if cache exists or defaultValue otherwise
      */
     public String getString(@NonNull final String key, final String defaultValue) {
         byte[] bytes = getBytes(key);
@@ -256,46 +255,48 @@ public final class CacheUtils {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // JSONObject 读写
+    // JSONObject io
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * 缓存中写入 JSONObject
+     * Put JSONObject in cache.
      *
-     * @param key   键
-     * @param value 值
+     * @param key   The key of cache.
+     * @param value The value of cache.
      */
-    public void put(@NonNull final String key, @NonNull final JSONObject value) {
+    public void put(@NonNull final String key, final JSONObject value) {
         put(key, value, -1);
     }
 
     /**
-     * 缓存中写入 JSONObject
+     * Put JSONObject in cache.
      *
-     * @param key      键
-     * @param value    值
-     * @param saveTime 保存时长，单位：秒
+     * @param key      The key of cache.
+     * @param value    The value of cache.
+     * @param saveTime The save time of cache, in seconds.
      */
-    public void put(@NonNull final String key, @NonNull final JSONObject value, final int saveTime) {
+    public void put(@NonNull final String key,
+                    final JSONObject value,
+                    final int saveTime) {
         put(key, CacheHelper.jsonObject2Bytes(value), saveTime);
     }
 
     /**
-     * 缓存中读取 JSONObject
+     * Return the JSONObject in cache.
      *
-     * @param key 键
-     * @return 存在且没过期返回对应值，否则返回{@code null}
+     * @param key The key of cache.
+     * @return the JSONObject if cache exists or null otherwise
      */
     public JSONObject getJSONObject(@NonNull final String key) {
         return getJSONObject(key, null);
     }
 
     /**
-     * 缓存中读取 JSONObject
+     * Return the JSONObject in cache.
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在且没过期返回对应值，否则返回默认值{@code defaultValue}
+     * @param key          The key of cache.
+     * @param defaultValue The default value if the cache doesn't exist.
+     * @return the JSONObject if cache exists or defaultValue otherwise
      */
     public JSONObject getJSONObject(@NonNull final String key, final JSONObject defaultValue) {
         byte[] bytes = getBytes(key);
@@ -305,46 +306,46 @@ public final class CacheUtils {
 
 
     ///////////////////////////////////////////////////////////////////////////
-    // JSONArray 读写
+    // JSONArray io
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * 缓存中写入 JSONArray
+     * Put JSONArray in cache.
      *
-     * @param key   键
-     * @param value 值
+     * @param key   The key of cache.
+     * @param value The value of cache.
      */
-    public void put(@NonNull final String key, @NonNull final JSONArray value) {
+    public void put(@NonNull final String key, final JSONArray value) {
         put(key, value, -1);
     }
 
     /**
-     * 缓存中写入 JSONArray
+     * Put JSONArray in cache.
      *
-     * @param key      键
-     * @param value    值
-     * @param saveTime 保存时长，单位：秒
+     * @param key      The key of cache.
+     * @param value    The value of cache.
+     * @param saveTime The save time of cache, in seconds.
      */
-    public void put(@NonNull final String key, @NonNull final JSONArray value, final int saveTime) {
+    public void put(@NonNull final String key, final JSONArray value, final int saveTime) {
         put(key, CacheHelper.jsonArray2Bytes(value), saveTime);
     }
 
     /**
-     * 缓存中读取 JSONArray
+     * Return the JSONArray in cache.
      *
-     * @param key 键
-     * @return 存在且没过期返回对应值，否则返回{@code null}
+     * @param key The key of cache.
+     * @return the JSONArray if cache exists or null otherwise
      */
     public JSONArray getJSONArray(@NonNull final String key) {
         return getJSONArray(key, null);
     }
 
     /**
-     * 缓存中读取 JSONArray
+     * Return the JSONArray in cache.
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在且没过期返回对应值，否则返回默认值{@code defaultValue}
+     * @param key          The key of cache.
+     * @param defaultValue The default value if the cache doesn't exist.
+     * @return the JSONArray if cache exists or defaultValue otherwise
      */
     public JSONArray getJSONArray(@NonNull final String key, final JSONArray defaultValue) {
         byte[] bytes = getBytes(key);
@@ -354,46 +355,46 @@ public final class CacheUtils {
 
 
     ///////////////////////////////////////////////////////////////////////////
-    // Bitmap 读写
+    // Bitmap io
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * 缓存中写入 Bitmap
+     * Put bitmap in cache.
      *
-     * @param key   键
-     * @param value 值
+     * @param key   The key of cache.
+     * @param value The value of cache.
      */
-    public void put(@NonNull final String key, @NonNull final Bitmap value) {
+    public void put(@NonNull final String key, final Bitmap value) {
         put(key, value, -1);
     }
 
     /**
-     * 缓存中写入 Bitmap
+     * Put bitmap in cache.
      *
-     * @param key      键
-     * @param value    值
-     * @param saveTime 保存时长，单位：秒
+     * @param key      The key of cache.
+     * @param value    The value of cache.
+     * @param saveTime The save time of cache, in seconds.
      */
-    public void put(@NonNull final String key, @NonNull final Bitmap value, final int saveTime) {
+    public void put(@NonNull final String key, final Bitmap value, final int saveTime) {
         put(key, CacheHelper.bitmap2Bytes(value), saveTime);
     }
 
     /**
-     * 缓存中读取 Bitmap
+     * Return the bitmap in cache.
      *
-     * @param key 键
-     * @return 存在且没过期返回对应值，否则返回{@code null}
+     * @param key The key of cache.
+     * @return the bitmap if cache exists or null otherwise
      */
     public Bitmap getBitmap(@NonNull final String key) {
         return getBitmap(key, null);
     }
 
     /**
-     * 缓存中读取 Bitmap
+     * Return the bitmap in cache.
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在且没过期返回对应值，否则返回默认值{@code defaultValue}
+     * @param key          The key of cache.
+     * @param defaultValue The default value if the cache doesn't exist.
+     * @return the bitmap if cache exists or defaultValue otherwise
      */
     public Bitmap getBitmap(@NonNull final String key, final Bitmap defaultValue) {
         byte[] bytes = getBytes(key);
@@ -402,46 +403,46 @@ public final class CacheUtils {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // Drawable 读写
+    // Drawable io
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * 缓存中写入 Drawable
+     * Put drawable in cache.
      *
-     * @param key   键
-     * @param value 值
+     * @param key   The key of cache.
+     * @param value The value of cache.
      */
-    public void put(@NonNull final String key, @NonNull final Drawable value) {
+    public void put(@NonNull final String key, final Drawable value) {
         put(key, CacheHelper.drawable2Bytes(value));
     }
 
     /**
-     * 缓存中写入 Drawable
+     * Put drawable in cache.
      *
-     * @param key      键
-     * @param value    值
-     * @param saveTime 保存时长，单位：秒
+     * @param key      The key of cache.
+     * @param value    The value of cache.
+     * @param saveTime The save time of cache, in seconds.
      */
-    public void put(@NonNull final String key, @NonNull final Drawable value, final int saveTime) {
+    public void put(@NonNull final String key, final Drawable value, final int saveTime) {
         put(key, CacheHelper.drawable2Bytes(value), saveTime);
     }
 
     /**
-     * 缓存中读取 Drawable
+     * Return the drawable in cache.
      *
-     * @param key 键
-     * @return 存在且没过期返回对应值，否则返回{@code null}
+     * @param key The key of cache.
+     * @return the drawable if cache exists or null otherwise
      */
     public Drawable getDrawable(@NonNull final String key) {
         return getDrawable(key, null);
     }
 
     /**
-     * 缓存中读取 Drawable
+     * Return the drawable in cache.
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在且没过期返回对应值，否则返回默认值{@code defaultValue}
+     * @param key          The key of cache.
+     * @param defaultValue The default value if the cache doesn't exist.
+     * @return the drawable if cache exists or defaultValue otherwise
      */
     public Drawable getDrawable(@NonNull final String key, final Drawable defaultValue) {
         byte[] bytes = getBytes(key);
@@ -450,96 +451,101 @@ public final class CacheUtils {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // Parcelable 读写
+    // Parcelable io
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * 缓存中写入 Parcelable
+     * Put parcelable in cache.
      *
-     * @param key   键
-     * @param value 值
+     * @param key   The key of cache.
+     * @param value The value of cache.
      */
-    public void put(@NonNull final String key, @NonNull final Parcelable value) {
+    public void put(@NonNull final String key, final Parcelable value) {
         put(key, value, -1);
     }
 
     /**
-     * 缓存中写入 Parcelable
+     * Put parcelable in cache.
      *
-     * @param key      键
-     * @param value    值
-     * @param saveTime 保存时长，单位：秒
+     * @param key      The key of cache.
+     * @param value    The value of cache.
+     * @param saveTime The save time of cache, in seconds.
      */
-    public void put(@NonNull final String key, @NonNull final Parcelable value, final int saveTime) {
+    public void put(@NonNull final String key, final Parcelable value, final int saveTime) {
         put(key, CacheHelper.parcelable2Bytes(value), saveTime);
     }
 
     /**
-     * 缓存中读取 Parcelable
+     * Return the parcelable in cache.
      *
-     * @param key     键
-     * @param creator 建造器
-     * @return 存在且没过期返回对应值，否则返回{@code null}
+     * @param key     The key of cache.
+     * @param creator The creator.
+     * @param <T>     The value type.
+     * @return the parcelable if cache exists or null otherwise
      */
-    public <T> T getParcelable(@NonNull final String key, @NonNull final Parcelable.Creator<T> creator) {
+    public <T> T getParcelable(@NonNull final String key,
+                               @NonNull final Parcelable.Creator<T> creator) {
         return getParcelable(key, creator, null);
     }
 
     /**
-     * 缓存中读取 Parcelable
+     * Return the parcelable in cache.
      *
-     * @param key          键
-     * @param creator      建造器
-     * @param defaultValue 默认值
-     * @return 存在且没过期返回对应值，否则返回默认值{@code defaultValue}
+     * @param key          The key of cache.
+     * @param creator      The creator.
+     * @param defaultValue The default value if the cache doesn't exist.
+     * @param <T>          The value type.
+     * @return the parcelable if cache exists or defaultValue otherwise
      */
-    public <T> T getParcelable(@NonNull final String key, @NonNull final Parcelable.Creator<T> creator, final T defaultValue) {
+    public <T> T getParcelable(@NonNull final String key,
+                               @NonNull final Parcelable.Creator<T> creator,
+                               final T defaultValue) {
         byte[] bytes = getBytes(key);
         if (bytes == null) return defaultValue;
         return CacheHelper.bytes2Parcelable(bytes, creator);
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // Serializable 读写
+    // Serializable io
     ///////////////////////////////////////////////////////////////////////////
 
     /**
-     * 缓存中写入 Serializable
+     * Put serializable in cache.
      *
-     * @param key   键
-     * @param value 值
+     * @param key   The key of cache.
+     * @param value The value of cache.
      */
-    public void put(@NonNull final String key, @NonNull final Serializable value) {
+    public void put(@NonNull final String key, final Serializable value) {
         put(key, value, -1);
     }
 
     /**
-     * 缓存中写入 Serializable
+     * Put serializable in cache.
      *
-     * @param key      键
-     * @param value    值
-     * @param saveTime 保存时长，单位：秒
+     * @param key      The key of cache.
+     * @param value    The value of cache.
+     * @param saveTime The save time of cache, in seconds.
      */
-    public void put(@NonNull final String key, @NonNull final Serializable value, final int saveTime) {
+    public void put(@NonNull final String key, final Serializable value, final int saveTime) {
         put(key, CacheHelper.serializable2Bytes(value), saveTime);
     }
 
     /**
-     * 缓存中读取 Serializable
+     * Return the serializable in cache.
      *
-     * @param key 键
-     * @return 存在且没过期返回对应值，否则返回{@code null}
+     * @param key The key of cache.
+     * @return the bitmap if cache exists or null otherwise
      */
     public Object getSerializable(@NonNull final String key) {
         return getSerializable(key, null);
     }
 
     /**
-     * 缓存中读取 Serializable
+     * Return the serializable in cache.
      *
-     * @param key          键
-     * @param defaultValue 默认值
-     * @return 存在且没过期返回对应值，否则返回默认值{@code defaultValue}
+     * @param key          The key of cache.
+     * @param defaultValue The default value if the cache doesn't exist.
+     * @return the bitmap if cache exists or defaultValue otherwise
      */
     public Object getSerializable(@NonNull final String key, final Object defaultValue) {
         byte[] bytes = getBytes(key);
@@ -548,40 +554,37 @@ public final class CacheUtils {
     }
 
     /**
-     * 获取缓存大小
-     * <p>单位：字节</p>
-     * <p>调用了 Thread.join()，需异步调用，否则可能主线程会卡顿</p>
+     * Return the size of cache, in bytes.
      *
-     * @return 缓存大小
+     * @return the size of cache, in bytes
      */
     public long getCacheSize() {
         return mCacheManager.getCacheSize();
     }
 
     /**
-     * 获取缓存个数
-     * <p>调用了 Thread.join()，需异步调用，否则可能主线程会卡顿</p>
+     * Return the count of cache.
      *
-     * @return 缓存个数
+     * @return the count of cache
      */
     public int getCacheCount() {
         return mCacheManager.getCacheCount();
     }
 
     /**
-     * 根据键值移除缓存
+     * Remove the cache by key.
      *
-     * @param key 键
-     * @return {@code true}: 移除成功<br>{@code false}: 移除失败
+     * @param key The key of cache.
+     * @return {@code true}: success<br>{@code false}: fail
      */
     public boolean remove(@NonNull final String key) {
         return mCacheManager.removeByKey(key);
     }
 
     /**
-     * 清除所有缓存
+     * Clear all of the cache.
      *
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @return {@code true}: success<br>{@code false}: fail
      */
     public boolean clear() {
         return mCacheManager.clear();
@@ -592,7 +595,8 @@ public final class CacheUtils {
         private final AtomicInteger cacheCount;
         private final long          sizeLimit;
         private final int           countLimit;
-        private final Map<File, Long> lastUsageDates = Collections.synchronizedMap(new HashMap<File, Long>());
+        private final Map<File, Long> lastUsageDates
+                = Collections.synchronizedMap(new HashMap<File, Long>());
         private final File cacheDir;
         private final Thread mThread;
 
@@ -702,9 +706,9 @@ public final class CacheUtils {
         }
 
         /**
-         * 移除旧的文件
+         * Remove the oldest files.
          *
-         * @return 移除的字节数
+         * @return the size of oldest files, in bytes
          */
         private long removeOldest() {
             if (lastUsageDates.isEmpty()) return 0;
@@ -743,13 +747,16 @@ public final class CacheUtils {
         }
 
         /**
-         * 创建过期时间
+         * Return the string of due time.
          *
-         * @param second 秒
-         * @return _$millis$_
+         * @param seconds The seconds.
+         * @return the string of due time
          */
-        private static String createDueTime(final int second) {
-            return String.format(Locale.getDefault(), "_$%010d$_", System.currentTimeMillis() / 1000 + second);
+        private static String createDueTime(final int seconds) {
+            return String.format(
+                    Locale.getDefault(), "_$%010d$_",
+                    System.currentTimeMillis() / 1000 + seconds
+            );
         }
 
         private static boolean isDue(final byte[] data) {
@@ -802,7 +809,13 @@ public final class CacheUtils {
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                CloseUtils.closeIO(fc);
+                try {
+                    if (fc != null) {
+                        fc.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -819,7 +832,13 @@ public final class CacheUtils {
                 e.printStackTrace();
                 return null;
             } finally {
-                CloseUtils.closeIO(fc);
+                try {
+                    if (fc != null) {
+                        fc.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -872,7 +891,8 @@ public final class CacheUtils {
             return bytes;
         }
 
-        private static <T> T bytes2Parcelable(final byte[] bytes, final Parcelable.Creator<T> creator) {
+        private static <T> T bytes2Parcelable(final byte[] bytes,
+                                              final Parcelable.Creator<T> creator) {
             if (bytes == null) return null;
             Parcel parcel = Parcel.obtain();
             parcel.unmarshall(bytes, 0, bytes.length);
@@ -894,7 +914,13 @@ public final class CacheUtils {
                 e.printStackTrace();
                 return null;
             } finally {
-                CloseUtils.closeIO(oos);
+                try {
+                    if (oos != null) {
+                        oos.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -908,7 +934,13 @@ public final class CacheUtils {
                 e.printStackTrace();
                 return null;
             } finally {
-                CloseUtils.closeIO(ois);
+                try {
+                    if (ois != null) {
+                        ois.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -920,7 +952,9 @@ public final class CacheUtils {
         }
 
         private static Bitmap bytes2Bitmap(final byte[] bytes) {
-            return (bytes == null || bytes.length == 0) ? null : BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            return (bytes == null || bytes.length <= 0)
+                    ? null
+                    : BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         }
 
         private static byte[] drawable2Bytes(final Drawable drawable) {
@@ -940,11 +974,21 @@ public final class CacheUtils {
             }
             Bitmap bitmap;
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-                bitmap = Bitmap.createBitmap(1, 1,
-                        drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
+                bitmap = Bitmap.createBitmap(
+                        1,
+                        1,
+                        drawable.getOpacity() != PixelFormat.OPAQUE
+                                ? Bitmap.Config.ARGB_8888
+                                : Bitmap.Config.RGB_565
+                );
             } else {
-                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(),
-                        drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);
+                bitmap = Bitmap.createBitmap(
+                        drawable.getIntrinsicWidth(),
+                        drawable.getIntrinsicHeight(),
+                        drawable.getOpacity() != PixelFormat.OPAQUE
+                                ? Bitmap.Config.ARGB_8888
+                                : Bitmap.Config.RGB_565
+                );
             }
             Canvas canvas = new Canvas(bitmap);
             drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -953,7 +997,9 @@ public final class CacheUtils {
         }
 
         private static Drawable bitmap2Drawable(final Bitmap bitmap) {
-            return bitmap == null ? null : new BitmapDrawable(Utils.getApp().getResources(), bitmap);
+            return bitmap == null
+                    ? null
+                    : new BitmapDrawable(Utils.getApp().getResources(), bitmap);
         }
     }
 

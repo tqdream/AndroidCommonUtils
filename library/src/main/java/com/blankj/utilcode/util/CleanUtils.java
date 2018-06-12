@@ -1,4 +1,4 @@
-package com.blankj.utilcode.util;
+package utilcode.util;
 
 import android.os.Environment;
 
@@ -9,7 +9,7 @@ import java.io.File;
  *     author: Blankj
  *     blog  : http://blankj.com
  *     time  : 2016/09/27
- *     desc  : 清除相关工具类
+ *     desc  : utils about clean
  * </pre>
  */
 public final class CleanUtils {
@@ -19,83 +19,84 @@ public final class CleanUtils {
     }
 
     /**
-     * 清除内部缓存
-     * <p>/data/data/com.xxx.xxx/cache</p>
+     * Clean the internal cache.
+     * <p>directory: /data/data/package/cache</p>
      *
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean cleanInternalCache() {
         return deleteFilesInDir(Utils.getApp().getCacheDir());
     }
 
     /**
-     * 清除内部文件
-     * <p>/data/data/com.xxx.xxx/files</p>
+     * Clean the internal files.
+     * <p>directory: /data/data/package/files</p>
      *
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean cleanInternalFiles() {
         return deleteFilesInDir(Utils.getApp().getFilesDir());
     }
 
     /**
-     * 清除内部数据库
-     * <p>/data/data/com.xxx.xxx/databases</p>
+     * Clean the internal databases.
+     * <p>directory: /data/data/package/databases</p>
      *
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean cleanInternalDbs() {
-        return deleteFilesInDir(Utils.getApp().getFilesDir().getParent() + File.separator + "databases");
+        return deleteFilesInDir(new File(Utils.getApp().getFilesDir().getParent(), "databases"));
     }
 
     /**
-     * 根据名称清除数据库
-     * <p>/data/data/com.xxx.xxx/databases/dbName</p>
+     * Clean the internal database by name.
+     * <p>directory: /data/data/package/databases/dbName</p>
      *
-     * @param dbName 数据库名称
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @param dbName The name of database.
+     * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean cleanInternalDbByName(final String dbName) {
         return Utils.getApp().deleteDatabase(dbName);
     }
 
     /**
-     * 清除内部 SP
-     * <p>/data/data/com.xxx.xxx/shared_prefs</p>
+     * Clean the internal shared preferences.
+     * <p>directory: /data/data/package/shared_prefs</p>
      *
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @return {@code true}: success<br>{@code false}: fail
      */
-    public static boolean cleanInternalSP() {
-        return deleteFilesInDir(Utils.getApp().getFilesDir().getParent() + File.separator + "shared_prefs");
+    public static boolean cleanInternalSp() {
+        return deleteFilesInDir(new File(Utils.getApp().getFilesDir().getParent(), "shared_prefs"));
     }
 
     /**
-     * 清除外部缓存
-     * <p>/storage/emulated/0/android/data/com.xxx.xxx/cache</p>
+     * Clean the external cache.
+     * <p>directory: /storage/emulated/0/android/data/package/cache</p>
      *
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean cleanExternalCache() {
-        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) && deleteFilesInDir(Utils.getApp().getExternalCacheDir());
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                && deleteFilesInDir(Utils.getApp().getExternalCacheDir());
     }
 
     /**
-     * 清除自定义目录下的文件
+     * Clean the custom directory.
      *
-     * @param dirPath 目录路径
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @param dirPath The path of directory.
+     * @return {@code true}: success<br>{@code false}: fail
      */
-    public static boolean cleanCustomCache(final String dirPath) {
+    public static boolean cleanCustomDir(final String dirPath) {
         return deleteFilesInDir(dirPath);
     }
 
     /**
-     * 清除自定义目录下的文件
+     * Clean the custom directory.
      *
-     * @param dir 目录
-     * @return {@code true}: 清除成功<br>{@code false}: 清除失败
+     * @param dir The directory.
+     * @return {@code true}: success<br>{@code false}: fail
      */
-    public static boolean cleanCustomCache(final File dir) {
+    public static boolean cleanCustomDir(final File dir) {
         return deleteFilesInDir(dir);
     }
 
@@ -105,11 +106,10 @@ public final class CleanUtils {
 
     private static boolean deleteFilesInDir(final File dir) {
         if (dir == null) return false;
-        // 目录不存在返回 true
+        // dir doesn't exist then return true
         if (!dir.exists()) return true;
-        // 不是目录返回 false
+        // dir isn't a directory then return false
         if (!dir.isDirectory()) return false;
-        // 现在文件存在且是文件夹
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
             for (File file : files) {
@@ -125,11 +125,10 @@ public final class CleanUtils {
 
     private static boolean deleteDir(final File dir) {
         if (dir == null) return false;
-        // 目录不存在返回 true
+        // dir doesn't exist then return true
         if (!dir.exists()) return true;
-        // 不是目录返回 false
+        // dir isn't a directory then return false
         if (!dir.isDirectory()) return false;
-        // 现在文件存在且是文件夹
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
             for (File file : files) {
@@ -155,40 +154,5 @@ public final class CleanUtils {
             }
         }
         return true;
-    }
-
-
-    //●════════════════以下为添加的方法═════════════════════════●
-    /**
-     * 清除 App 所有数据
-     *
-     * @param dirPaths 目录路径
-     * @return {@code true}: 成功<br>{@code false}: 失败
-     */
-    public static boolean cleanAppData(final String... dirPaths) {
-        File[] dirs = new File[dirPaths.length];
-        int i = 0;
-        for (String dirPath : dirPaths) {
-            dirs[i++] = new File(dirPath);
-        }
-        return cleanAppData(dirs);
-    }
-
-    /**
-     * 清除 App 所有数据
-     *
-     * @param dirs 目录
-     * @return {@code true}: 成功<br>{@code false}: 失败
-     */
-    public static boolean cleanAppData(final File... dirs) {
-        boolean isSuccess = CleanUtils.cleanInternalCache();
-        isSuccess &= CleanUtils.cleanInternalDbs();
-        isSuccess &= CleanUtils.cleanInternalSP();
-        isSuccess &= CleanUtils.cleanInternalFiles();
-        isSuccess &= CleanUtils.cleanExternalCache();
-        for (File dir : dirs) {
-            isSuccess &= CleanUtils.cleanCustomCache(dir);
-        }
-        return isSuccess;
     }
 }

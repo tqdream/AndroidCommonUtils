@@ -129,7 +129,7 @@ public class XmlParseUtiles {
                                 //判断是不是List类型
                                 if (f[i].getType()
                                         .getName()
-                                        .equals("java.util.List")) {
+                                        .equals("java.com.blankj.subutil.util.List")) {
                                     Type type = f[i].getGenericType();
                                     if (type instanceof ParameterizedType) {
                                         //获得泛型参数的实际类型

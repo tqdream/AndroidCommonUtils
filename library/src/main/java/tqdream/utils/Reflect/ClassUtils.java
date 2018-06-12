@@ -97,7 +97,7 @@ public class ClassUtils {
         CLASS_CACHE.put("java.lang.Object", Object.class);
         CLASS_CACHE.put("java.lang.Class", Class.class);
         CLASS_CACHE.put("java.lang.Void", Void.class);
-        CLASS_CACHE.put("java.tqdream.util.Date", Date.class);
+        CLASS_CACHE.put("java.tqdream.com.blankj.subutil.util.Date", Date.class);
         CLASS_CACHE.put("boolean[]", boolean[].class);
         CLASS_CACHE.put("char[]", char[].class);
         CLASS_CACHE.put("byte[]", byte[].class);
@@ -132,7 +132,7 @@ public class ClassUtils {
         CLASS_CACHE.put("java.lang.Object[]", Object[].class);
         CLASS_CACHE.put("java.lang.Class[]", Class[].class);
         CLASS_CACHE.put("java.lang.Void[]", Void[].class);
-        CLASS_CACHE.put("java.tqdream.util.Date[]", Date[].class);
+        CLASS_CACHE.put("java.tqdream.com.blankj.subutil.util.Date[]", Date[].class);
     }
 
 
