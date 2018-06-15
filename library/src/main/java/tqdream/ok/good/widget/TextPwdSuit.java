@@ -14,27 +14,33 @@ limitations under the License.*/
 
 package tqdream.ok.good.widget;
 
+import android.support.annotation.IntDef;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
- * 带清除按钮EditText或TextView套件，如果输入为空则隐藏清除按钮
+ * 带icon按钮EditText或TextView套件
  *
  * @author taoqiang
- * @use new TextClearSuit().addClearListener(...);
+ * @use new TextPwdSuit().addClearListener(...);
  */
-public class TextClearSuit {
-    private static final String TAG = "TextClearSuit";
+public class TextPwdSuit {
+    private static final String TAG = "TextPwdSuit";
 
     private TextView tv;
-    private View clearView;
+    private View eyeView;
 
     private String inputedString;
 
@@ -42,8 +48,8 @@ public class TextClearSuit {
         return tv;
     }
 
-    public View getClearView() {
-        return clearView;
+    public View getEyeView() {
+        return eyeView;
     }
 
     public String getInputedString() {
@@ -55,14 +61,28 @@ public class TextClearSuit {
     public static final int BLANK_TYPE_TRIM = 1;
     public static final int BLANK_TYPE_NO_BLANK = 2;
 
+    @IntDef({BLANK_TYPE_DEFAULT, BLANK_TYPE_TRIM, BLANK_TYPE_NO_BLANK})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface BlankType {
+    }
+
+    public static final int ALWAYS = 0;
+    public static final int INVISIBLE = 1;
+    public static final int GONE = 2;
+
+    @IntDef({ALWAYS, INVISIBLE, GONE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface EyeView {
+    }
+
     /**
      * 默认trim，隐藏方式为gone
      *
      * @param tv
-     * @param clearView
+     * @param eyeView
      */
-    public void addClearListener(final TextView tv, final View clearView) {
-        addClearListener(tv, BLANK_TYPE_DEFAULT, clearView, false);
+    public void addClearListener(final TextView tv, final View eyeView) {
+        addClearListener(tv, BLANK_TYPE_DEFAULT, eyeView, INVISIBLE);
     }
 
     /**
@@ -70,36 +90,48 @@ public class TextClearSuit {
      *
      * @param tv
      * @param blankType
-     * @param clearView
+     * @param eyeView
      */
-    public void addClearListener(final TextView tv, final int blankType, final View clearView) {
-        addClearListener(tv, blankType, clearView, false);
+    public void addClearListener(final TextView tv, @BlankType final int blankType, final View eyeView) {
+        addClearListener(tv, blankType, eyeView, INVISIBLE);
     }
 
     /**
-     * @param tv                   输入框
-     * @param blankType            et内容前后是否不能含有空格
-     * @param clearView            清除输入框内容按钮
-     * @param isClearViewInvisible 如果et输入为空，隐藏clearView的方式为gone(false)还是invisible(true)
+     * @param tv                 输入框
+     * @param blankType          et内容前后是否不能含有空格
+     * @param eyeView            清除输入框内容按钮
+     * @param eyeViewVisibleType 如果et输入为空，隐藏clearView的方式为gone(false)还是invisible(true)
      */
-    public void addClearListener(final TextView tv, final int blankType, final View clearView, final boolean isClearViewInvisible) {
-        if (tv == null || clearView == null) {
-            Log.e(TAG, "addClearListener  (tv == null || clearView == null)  >> return;");
+    public void addClearListener(final TextView tv, @BlankType final int blankType, final View eyeView, @EyeView final int eyeViewVisibleType) {
+        if (tv == null || eyeView == null) {
+            Log.e(TAG, "addClearListener  (tv == null || eyeView == null)  >> return;");
             return;
         }
 
         this.tv = tv;
-        this.clearView = clearView;
+        this.eyeView = eyeView;
         if (tv.getText() != null) {
             inputedString = tv.getText().toString();
         }
 
-        clearView.setVisibility(isNotEmpty(tv, false) ? View.VISIBLE : View.GONE);
-        clearView.setOnClickListener(new OnClickListener() {
+        if (eyeViewVisibleType == ALWAYS) {
+            eyeView.setVisibility(View.VISIBLE);
+        } else {
+            eyeView.setVisibility(isNotEmpty(tv, false) ? View.VISIBLE : View.GONE);
+        }
+
+        //默认隐藏密码
+        tv.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+        eyeView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv.setText("");
+                tv.setTransformationMethod(
+                        tv.getTransformationMethod() == PasswordTransformationMethod.getInstance() ?
+                                HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
                 tv.requestFocus();
+                if (tv instanceof EditText)
+                    ((EditText) tv).setSelection(tv.length());
             }
         });
 
@@ -119,10 +151,10 @@ public class TextClearSuit {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s == null || isEmpty(s.toString(), false)) {
                     inputedString = "";
-                    if (isClearViewInvisible) {
-                        clearView.setVisibility(View.INVISIBLE);
+                    if (eyeViewVisibleType == INVISIBLE) {
+                        eyeView.setVisibility(View.INVISIBLE);
                     } else {
-                        clearView.setVisibility(View.GONE);
+                        eyeView.setVisibility(View.GONE);
                     }
                 } else {
                     inputedString = "" + s.toString();
@@ -137,8 +169,8 @@ public class TextClearSuit {
                         }
                     }
 
-                    if (inputedString.length() > 0 && clearView.getVisibility() != View.VISIBLE)
-                        clearView.setVisibility(View.VISIBLE);
+                    if (inputedString.length() > 0 && eyeView.getVisibility() != View.VISIBLE)
+                        eyeView.setVisibility(View.VISIBLE);
                 }
 
                 if (listener != null)
