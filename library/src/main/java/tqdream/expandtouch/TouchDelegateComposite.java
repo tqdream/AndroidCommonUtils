@@ -1,4 +1,4 @@
-package com.autohome.main.car.util.expandtouch;
+package tqdream.expandtouch;
 
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
