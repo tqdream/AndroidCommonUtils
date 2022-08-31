@@ -37,6 +37,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.LeadingMarginSpan;
 import android.text.style.LineHeightSpan;
 import android.text.style.MaskFilterSpan;
+import android.text.style.MetricAffectingSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.ReplacementSpan;
 import android.text.style.ScaleXSpan;
@@ -60,14 +61,6 @@ import java.lang.ref.WeakReference;
 
 import static android.graphics.BlurMaskFilter.Blur;
 
-/**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 16/12/13
- *     desc  : utils about span
- * </pre>
- */
 public final class SpanUtils {
 
     private static final int COLOR_DEFAULT = 0xFEFFFFFF;
@@ -117,7 +110,8 @@ public final class SpanUtils {
     private String        fontFamily;
     private Typeface      typeface;
     private Alignment     alignment;
-    private int           verticalAlign;
+    private boolean       verticalCenter;
+    private int           verticalOffsetDp;
     private ClickableSpan clickSpan;
     private String        url;
     private float         blurRadius;
@@ -179,7 +173,8 @@ public final class SpanUtils {
         fontFamily = null;
         typeface = null;
         alignment = null;
-        verticalAlign = -1;
+        verticalCenter = false;
+        verticalOffsetDp = 0;
         clickSpan = null;
         url = null;
         blurRadius = -1;
@@ -491,18 +486,18 @@ public final class SpanUtils {
 
     /**
      * Set the span of vertical alignment.
-     *
-     * @param align The alignment.
-     *              <ul>
-     *              <li>{@link Align#ALIGN_TOP     }</li>
-     *              <li>{@link Align#ALIGN_CENTER  }</li>
-     *              <li>{@link Align#ALIGN_BASELINE}</li>
-     *              <li>{@link Align#ALIGN_BOTTOM  }</li>
-     *              </ul>
-     * @return the single {@link SpanUtils} instance
      */
-    public SpanUtils setVerticalAlign(@Align final int align) {
-        this.verticalAlign = align;
+    public SpanUtils setVerticalCenter() {
+        this.verticalCenter = true;
+        return this;
+    }
+
+    /**
+     * @param dpOffsetY
+     * @return
+     */
+    public SpanUtils setVerticalOffsetDp(final int dpOffsetY) {
+        this.verticalOffsetDp = dpOffsetY;
         return this;
     }
 
@@ -860,9 +855,16 @@ public final class SpanUtils {
         }
         mBuilder.append(mText);
         int end = mBuilder.length();
-        if (verticalAlign != -1) {
-            mBuilder.setSpan(new VerticalAlignSpan(verticalAlign), start, end, flag);
+        if (verticalCenter) {
+//            mBuilder.setSpan(new VerticalAlignSpan(foregroundColor), start, end, flag);
+            mBuilder.setSpan(new VerticalTextSpan(fontSize,fontSizeIsDp), start, end, flag);
         }
+
+        if (verticalOffsetDp != 0) {
+//            mBuilder.setSpan(new VerticalOffsetAlignSpan(verticalOffset,foregroundColor,fontSize), start, end, flag);
+            mBuilder.setSpan(new VerticalOffsetTextSpan(verticalOffsetDp,fontSize,fontSizeIsDp), start, end, flag);
+        }
+
         if (foregroundColor != COLOR_DEFAULT) {
             mBuilder.setSpan(new ForegroundColorSpan(foregroundColor), start, end, flag);
         }
@@ -984,54 +986,6 @@ public final class SpanUtils {
         updateCharCharSequence();
         int end = mBuilder.length();
         mBuilder.setSpan(new SpaceSpan(spaceSize, spaceColor), start, end, flag);
-    }
-
-    static class VerticalAlignSpan extends ReplacementSpan {
-
-        static final int ALIGN_CENTER = 2;
-        static final int ALIGN_TOP    = 3;
-
-        final int mVerticalAlignment;
-
-        VerticalAlignSpan(int verticalAlignment) {
-            mVerticalAlignment = verticalAlignment;
-        }
-
-        @Override
-        public int getSize(@NonNull Paint paint, CharSequence text, int start, int end, @Nullable Paint.FontMetricsInt fm) {
-            text = text.subSequence(start, end);
-            return (int) paint.measureText(text.toString());
-        }
-
-        @Override
-        public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint) {
-            text = text.subSequence(start, end);
-            Paint.FontMetricsInt fm = paint.getFontMetricsInt();
-//            int need = height - (v + fm.descent - fm.ascent - spanstartv);
-//            if (need > 0) {
-//                if (mVerticalAlignment == ALIGN_TOP) {
-//                    fm.descent += need;
-//                } else if (mVerticalAlignment == ALIGN_CENTER) {
-//                    fm.descent += need / 2;
-//                    fm.ascent -= need / 2;
-//                } else {
-//                    fm.ascent -= need;
-//                }
-//            }
-//            need = height - (v + fm.bottom - fm.top - spanstartv);
-//            if (need > 0) {
-//                if (mVerticalAlignment == ALIGN_TOP) {
-//                    fm.bottom += need;
-//                } else if (mVerticalAlignment == ALIGN_CENTER) {
-//                    fm.bottom += need / 2;
-//                    fm.top -= need / 2;
-//                } else {
-//                    fm.top -= need;
-//                }
-//            }
-
-            canvas.drawText(text.toString(), x, y - ((y + fm.descent + y + fm.ascent) / 2 - (bottom + top) / 2), paint);
-        }
     }
 
     static class CustomLineHeightSpan implements LineHeightSpan {
@@ -1456,5 +1410,172 @@ public final class SpanUtils {
             implements Serializable {
 
         private static final long serialVersionUID = 4909567650765875771L;
+    }
+
+    //****************************************************************************************
+    /**
+     * 上角标Span(优于系统的)
+     */
+    public class SuperScriptTextSpan extends MetricAffectingSpan {
+        private int fontSizeSp = -1;
+        private boolean isSp;
+
+        public SuperScriptTextSpan(int fontSizeSp, boolean isSp) {
+            this.fontSizeSp = fontSizeSp;
+            this.isSp = isSp;
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            float ascent = ds.ascent();
+            Log.d("SuperScriptTextSpan", "ascent-> " + ds.ascent());
+            if (fontSizeSp != -1) {
+                ds.setTextSize(isSp ? fontSizeSp * ds.density : fontSizeSp);
+            }
+            float newAscent = ds.ascent();
+            Log.d("SuperScriptTextSpan", "newAscent-> " + ds.ascent());
+
+            ds.baselineShift += ascent - newAscent;
+
+            //方法2：
+            //Rect bounds = new Rect();
+            //ds.getTextBounds("1A", 0, 2, bounds);
+            //int shift = bounds.top - bounds.bottom;
+            //if (fontSizeSp != -1) {
+            //    ds.setTextSize(isSp ? fontSizeSp * ds.density : fontSizeSp);
+            //}
+            //ds.getTextBounds("1A", 0, 2, bounds);
+            //shift += bounds.bottom - bounds.top;
+            //ds.baselineShift += shift;
+        }
+
+        @Override
+        public void updateMeasureState(TextPaint p) {
+            updateDrawState(p);
+        }
+    }
+
+    /**
+     * 设置文字垂直居中的Span
+     */
+    public class VerticalTextSpan extends MetricAffectingSpan {
+        private int fontSizeSp = -1;//字体大小
+        private boolean isSp;
+
+        public VerticalTextSpan(int fontSizeSp, boolean isSp) {
+            this.fontSizeSp = fontSizeSp;
+            this.isSp = isSp;
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            float center = (ds.descent() + ds.ascent()) / 2;
+            if (fontSizeSp != -1) {
+                ds.setTextSize(isSp ? fontSizeSp * ds.density : fontSizeSp);
+            }
+            float newCenter = ( ds.descent() + ds.ascent()) / 2;
+            ds.baselineShift += center - newCenter;
+        }
+
+        @Override
+        public void updateMeasureState(TextPaint p) {
+            updateDrawState(p);
+        }
+    }
+
+    /**
+     * 设置文字垂直偏移的Span
+     */
+    public class VerticalOffsetTextSpan extends MetricAffectingSpan {
+        private int fontSizeSp = -1;//字体大小sp
+        private int verticalOffset = 0;//单位:px
+        private boolean isSp;
+
+        public VerticalOffsetTextSpan(int verticalOffsetDp, int fontSizeSp,boolean isSp) {
+            this.verticalOffset = verticalOffsetDp;
+            this.fontSizeSp = fontSizeSp;
+            this.isSp = isSp;
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            if (fontSizeSp != -1) {
+                ds.setTextSize(isSp ? fontSizeSp * ds.density : fontSizeSp);
+            }
+            ds.baselineShift -= verticalOffset * ds.density;
+        }
+
+        @Override
+        public void updateMeasureState(TextPaint p) {
+            updateDrawState(p);
+        }
+    }
+
+    /**
+     * 备注：使用这个Span，当设置singLine=true时，会出现显示文本显示成OBJ，或者末尾一个Span显示成...文字不显示的问题。
+     * 不设置singleLine，或者设置android:maxLines="1"  android:ellipsize="end" 该Span没有问题。
+     */
+    @Deprecated
+    static class VerticalAlignSpan extends ReplacementSpan {
+        final int mColor;
+
+        VerticalAlignSpan(int color) {
+            this.mColor = color;
+        }
+
+        @Override
+        public int getSize(@NonNull Paint paint, CharSequence text, int start, int end, @Nullable Paint.FontMetricsInt fm) {
+            text = text.subSequence(start, end);
+            return (int) paint.measureText(text.toString());
+        }
+
+        @Override
+        public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, @NonNull Paint paint) {
+            paint.setColor(mColor);
+            text = text.subSequence(start, end);
+            Paint.FontMetricsInt fm = paint.getFontMetricsInt();
+            canvas.drawText(text.toString(), x, y - ((y + fm.descent + y + fm.ascent) / 2 - (bottom + top) / 2), paint);
+        }
+    }
+
+    /**
+     * 备注：使用这个Span，当设置singLine=true时，会出现显示文本显示成OBJ，或者末尾一个Span显示成...文字不显示的问题。
+     * 不设置singleLine，或者设置android:maxLines="1"  android:ellipsize="end" 该Span没有问题。
+     */
+    @Deprecated
+    static class VerticalOffsetAlignSpan extends ReplacementSpan {
+        int fontSizeSp;    //字体大小sp
+        int verticalOffset = 0;//单位:px
+        int mColor;
+
+        /**
+         * @param verticalOffset 上下偏移量，正值为向上偏移，负值为向下偏移
+         * @param color 颜色
+         */
+        public VerticalOffsetAlignSpan(int verticalOffset, int color, int fontSizeSp) {
+            this.verticalOffset = verticalOffset;
+            this.mColor = color;
+            this.fontSizeSp = fontSizeSp;
+        }
+
+        @Override
+        public int getSize(@NonNull Paint paint, CharSequence text, int start, int end, @Nullable Paint.FontMetricsInt fm) {
+            Paint newPaint = getCustomTextPaint(paint);
+            return (int) newPaint.measureText(text, start, end);
+        }
+
+        @Override
+        public void draw(@NonNull Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int
+                bottom, @NonNull Paint paint) {
+            Paint newPaint = getCustomTextPaint(paint);
+            newPaint.setColor(this.mColor);
+            canvas.drawText(text.toString(), start, end, x, y, newPaint);
+        }
+
+        private TextPaint getCustomTextPaint(Paint srcPaint) {
+            TextPaint paint = new TextPaint(srcPaint);
+            paint.setTextSize(fontSizeSp * paint.density);
+            return paint;
+        }
     }
 }
